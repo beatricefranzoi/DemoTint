@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+
+    <title>Tint</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="./images/favicon.ico">
+
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Patrick Hand' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet'>
+
+    <link rel="stylesheet" href="./bootstrap-italia.min.css">
+    <!--<script>window.__PUBLIC_PATH__ = '/Users/beatrice/Desktop/bootstrap-italia/fonts'</script>-->
+    <script src="./bootstrap-italia.bundle.min.js"></script>
+    <link rel="stylesheet" href="switchery.min.css" />    
+
+    <!-- Brat -->
+    <script type="text/javascript" src="http://hlt-services7.fbk.eu/mysql/js/brat/client/lib/head.load.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="brat.js"></script>
+    <link rel="stylesheet" type="text/css" href="brat.css"/>
+
+    <script type="text/javascript" src="scripts.js"></script>
+    <script type="text/javascript" src="switchery.min.js"></script>
+
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="lightgrey-bg-c1" id="headerRow">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <img id="logo" src="images/logoTint.png">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center"> 
+                <h5>Lend color to your Italian texts!</h5>
+            </div>
+        </div>
+    </div>
+
+    <div id="part1">
+        <div class="lightgrey-bg-c1 row justify-content-center">
+            <div class="col-lg-8 col-sm-8 col-11">
+                <div class="card" id="card" style='margin-top:-50px; border-radius: 20px;'>
+                    <div class="card-body">
+                        <p style="margin-left:10px;">Insert a text in Italian and press the blue button:</p>  
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <textarea class="form-control area_testo" id="text" rows="10"></textarea>
+                            </div>
+                            <div class="form-group" style='margin-top: -30px; margin-left: 10px;'>
+                                <div class="bootstrap-select-wrapper">
+                                    <select class="form-control" style='margin-top:20px;' id="select_examples" >
+                                        <option value="">Examples: </option>
+                                        <option value="Appostamenti di caccia realizzati secondo le disposizioni provinciali vigenti in materia di protezione della fauna selvatica ed esercizio della caccia, realizzati in difformità rispetto ai criteri e alle tipologie approvati dalla sottocommissione della CUP con riferimento alle relazioni con il contesto, alle forme e ai materiali da impiegare nella realizzazione. Il proprietario dichiara di essere a conoscenza l'autorizzazione paesaggistica è efficace per cinque anni dal rilascio. Se l'autorizzazione è necessaria per l'esecuzione di un intervento soggetto a permesso di costruire o a SCIA, la scadenza dell'autorizzazione paesaggistica coincide con quella del titolo abilitativo edilizio, anche nel caso di proroga del titolo. In ogni caso la domanda di permesso di costruire o la SCIA sono richieste o presentate, rispettivamente, entro un anno dal rilascio dell'autorizzazione paesaggistica.">
+                                        Difficult - Appostamenti di caccia realizzati secondo [...]
+                                        </option>
+                                        <option value="Un picchio e una pallina si trovavano in un cassetto in mezzo agli altri giocattoli, e il picchio propose: &quot;Visto che siamo insieme qui nel cassetto, perché non ci fidanziamo?&quot; Ma la palla, che era di cuoio marocchino e si credeva una signorina di buona società, nemmeno volle rispondere. Il giorno dopo il bambino che possedeva tutti i giocattoli ridipinse il picchio di rosso e di giallo, e ci piantò un chiodo d'ottone nel mezzo: che figurone che faceva adesso, soprattutto quando faceva la ruota. &quot;Guardami, adesso&quot;, disse alla pallina. &quot;Perché non ci fidanziamo? Tu salti, io ballo, siamo fatti l'uno per l'altra! Chi potrebbe essere più felice di noi?&quot; &quot;Davvero?&quot;, diceva la pallina, &quot;ma lo sai che mio padre e mia madre erano pantofole in marocchino, e che io ho un tappo in corpo!&quot; &quot;E allora? Io sono fatto di mogano, ed è stato il sindaco del paese a farmi! Lui ha un tornio, e si è divertito tantissimo!&quot; &quot;Mah... mi devo fidare?&quot;, disse la pallina. &quot;Che io sia frustato, se ho mai detto una bugia!&quot;, rispose il picchio. &quot;Dici bene, tu&quot;, disse la pallina, &quot;ma io sono già quasi fidanzata con un rondone! Ogni volta che mi lancio in aria, lui si affaccia dal nido e dice &quot;mi vuoi? Mi vuoi?&quot; Io ormai ho detto di sì nel mio cuore , e questo è quasi un mezzo fidanzamento! Comunque ti prometto che non ti dimenticherò mai!&quot; &quot;Sì, capirai!&quot;, disse il picchio, e non si rivolsero più la parola. Il giorno dopo la pallina fu tolta dal cassetto: il picchio la vide lanciarsi alta nell'aria, come un uccello, finché non scompariva.">
+                                        Easy - Un picchio e una pallina si trovavano in un cassetto [...]
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" style='margin-top: -20px; margin-left:10px'>
+                                <div class="text-right button_invia">
+                                    <button class="btn click-btn has-spinner text-white" type="submit" style="  background-color: #D02838;">
+                                    Process text  
+                                    <div class="spinner progress progress-indeterminate">
+                                        <div class="progress-bar" role="progressbar"></div>
+                                    </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="part2" class="inactive">
+        <div class="row lightgrey-bg-c1 justify-content-center">
+            <div class="col-lg-6 col-md-10 col-sm-10 col-11" id="l-col">
+                <!--start card-->
+                <div class="card-wrapper card-space" style='margin-top:-50px;'>
+                    <div class="card border-card" id="card" style='border-radius: 20px;'>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <span><strong>GENERAL INFORMATIONS</strong></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush" id="statistics1" style="font-size:14px;"></ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush" id="statistics2" style="font-size:14px;"></ul>
+                                </div>
+                            </div>
+
+                            <div class="row resize">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-6">
+                                    <div id="gauge-gulpease">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 col-5">
+                                                <div id="gauge-slot-gulpease"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end move_left">
+                                            <div class="col-lg-5 col-md-5 col-sm-3 col-6" >
+                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px; "><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                            </div>
+                                        </div>
+                                        <!--<div class="row justify-content-center">
+                                            <div class="col-lg-12 col-md-10 col-sm-10 col-10 gauge-description"></div>
+                                            </div>-->
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-6">
+                                    <div id="gauge-level1">
+                                        <div class="row">
+                                            <div class=" col-md-6 col-sm-6 col-6">
+                                                <div id="gauge-slot-1"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end move_left">
+                                            <div class="col-lg-5 col-md-5 col-sm-3 col-6" >
+                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                                <!--<a data-toggle="tooltip" class="tool-info" data-placement="right" title="Questo indicatore mostra quanto sia difficile la comprensione del testo per un utente che conosca solo le 2.500 parole più diffuse della lingua italiana."><svg class="icon" style="width: 22px; margin-top:-60px; margin-left:50px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg></a>-->
+                                            </div>
+                                        </div>
+                                        <!--<div class="row justify-content-center">
+                                                <div class="col-lg-12 col-md-10 col-sm-10 col-10 gauge-description">
+                                                </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-6">
+                                    <div id="gauge-level2">
+                                        <div class="row">
+                                            <div class=" col-md-6 col-sm-6 col-6">
+                                                <div id="gauge-slot-2"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end move_left">
+                                            <div class="col-lg-5 col-md-5 col-sm-3 col-6">
+                                                <!--<a data-toggle="tooltip" class="tool-info" data-placement="right" title="Questo indicatore mostra quanto sia difficile la comprensione del testo per un utente che conosca solo le 5.000 parole più diffuse della lingua italiana."><svg class="icon" style="width: 22px; margin-top:-60px; margin-left:50px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg></a>-->
+                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                            </div>
+                                        </div>
+                                        <!--<div class="row justify-content-center">
+                                                <div class="col-lg-12 col-md-10 col-sm-10 col-10 gauge-description">
+                                                </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-6">
+                                    <div id="gauge-level3">
+                                        <div class="row">
+                                            <div class=" col-md-6 col-sm-6 col-6">
+                                                <div id="gauge-slot-3"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row d-flex justify-content-end move_left">
+                                            <div class="col-lg-5 col-md-5 col-sm-3 col-5">
+                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                            </div>
+                                        </div>
+                                        <!--<div class="row justify-content-center">
+                                                <div class="col-lg-12 col-md-10 col-sm-10 col-10 gauge-description">
+                                                </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>          
+
+            <div class="col-lg-4 col-md-10 col-sm-10 col-11" id="l-col">
+                <!--start card-->
+                <div class="card-wrapper card-space" style='margin-top:-50px;'>
+                    <div class="card border-card" id="card" style='border-radius: 20px;'>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <span><strong>READABILITY STATISTICS</strong></span>
+                            </div>
+                            <div class="panel panel-info" id="difficulty-values-panel"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+        </div>
+
+        <div class="row lightgrey-bg-c1 justify-content-center">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-11">
+                <div class="card-wrapper card-space" style='margin-top:-50px;'>
+                    <div class="card border-card" id="card" style='border-radius: 20px;'>
+                        <div class="card-body">
+                            <nav>
+                                <div class="nav nav-tabs col-12" id="nav-tab" role="tablist" >
+                                <a class="nav-item nav-link active col-lg-4 col-md-4 col-sm-4 col-4" id="text-original" data-toggle="tab" href="#text-original-content" role="tab" aria-controls="text-original-content" aria-selected="true">PART OF SPEECH</a>
+                                <a class="nav-item nav-link col-lg-4 col-md-5 col-sm-5 col-6" id="linguistic-annotations-tab" data-toggle="tab" href="#linguistic-annotations" role="tab" aria-controls="linguistic-annotations" aria-selected="false">LINGUISTIC ANNOTATIONS</a>
+                                <a class="nav-item nav-link col-lg-4 col-md-3 col-sm-3 col-2" id="file-json" data-toggle="tab" href="#file-json-content" role="tab" aria-controls="file-json-content" aria-selected="true">JSON FILE</a>
+                                </div>
+                            </nav>
+
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane p-4 fade show active" id="text-original-content" role="tabpanel" aria-labelledby="text-original">
+                                    <div class="row" style="margin-left:-30px;">
+                                        <div class="col-lg-10 col-md-9 col-sm-8 col-12">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div id="infoText"></div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-2 col-md-3 col-sm-4 col-12">
+                                            <div class="panel panel-warning">
+                                                <div class="panel-body">
+                                                    <p class="font-weight-bold size" style="margin-left: 23px;">Legend</p>
+                                                    <ul class="legenda textInfo">
+                                                        <li style="margin-top:-15px;"><span class="a" style="padding: 1px 6px;"> </span> : Adjective</li>
+                                                        <li style="margin-top:-15px;"><span class="b" style="padding: 1px 6px;"> </span> : Adverb</li>
+                                                        <li style="margin-top:-15px;"><span class="s" style="padding: 1px 6px;"> </span> : Conjunction</li>
+                                                        <li style="margin-top:-15px;"><span class="d" style="padding: 1px 6px;"> </span> : Adj. (det.)</li>
+                                                        <li style="margin-top:-15px;"><span class="e" style="padding: 1px 6px;"> </span> : Preposition</li>
+                                                        <li style="margin-top:-15px;"><span class="f" style="padding: 1px 6px;"> </span> : Punctuation</li>
+                                                        <li style="margin-top:-15px;"><span class="n" style="padding: 1px 6px;"> </span> : Number</li>
+                                                        <li style="margin-top:-15px;"><span class="f" style="padding: 1px 6px;"> </span> : Pronoun</li>
+                                                        <li style="margin-top:-15px;"><span class="r" style="padding: 1px 6px;"> </span> : Determiner</li>
+                                                        <li style="margin-top:-15px;"><span class="s" style="padding: 1px 6px;"> </span> : Noun</li>
+                                                        <li style="margin-top:-15px;"><span class="v" style="padding: 1px 6px;"> </span> : Verb</li>
+                                                        <li style="margin-top:-15px;"><span class="b" style="padding: 1px 6px;"> </span> : Other</li>
+                                                    </ul>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane p-4 fade" id="linguistic-annotations" role="tabpanel" aria-labelledby="linguistic-annotations-tab">
+                                    <div class="row" style="margin-left:-30px;">
+                                        <div class="col-lg-10 col-md-9 col-sm-8 col-12">
+                                            <div class="panel panel-warning">
+                                                <div class="panel-body" id="annotations"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-sm-4 col-12">
+                                            <div class="panel panel-warning">
+                                                <div class="panel-body">
+                                                    <p class="font-weight-bold size" style="margin-left: 23px;">Legend</p>
+                                                    <ul class="legenda">
+                                                        <li><span class="a">A</span> : Adjective</li>
+                                                        <li><span class="b">B</span> : Adverb</li>
+                                                        <li><span class="s">C</span> : Conjunction</li>
+                                                        <li><span class="d">D</span> : Adj. (det.)</li>
+                                                        <li><span class="e">E</span> : Preposition</li>
+                                                        <li><span class="f">F</span> : Punctuation</li>
+                                                        <li><span class="n">N</span> : Number</li>
+                                                        <li><span class="f">P</span> : Pronoun</li>
+                                                        <li><span class="r">R</span> : Determiner</li>
+                                                        <li><span class="s">S</span> : Noun</li>
+                                                        <li><span class="v">V</span> : Verb</li>
+                                                        <li><span class="b">X</span> : Other</li>
+                                                    </ul>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane p-4 fade" id="file-json-content" role="tabpanel" aria-labelledby="text-original">
+                                    <div class="row" style="margin-left:-30px;">
+                                        <div class="col-lg-10">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body" >
+                                                    <pre id="showJson"></pre>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </div>
+            
+    <div id="footer" class="lightgrey-bg-c1 rounded">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center" id="footer_logo">
+                <a href="http://www.simpatico-project.eu">
+                    <img id="logodx" src="images/logo.png" style='margin-right:-20px;'>
+                </a>
+                <a href="http://dh.fbk.eu">
+                    <img id="logodh" src="images/logo-dh.png" style='margin-right:-20px;'>
+                </a>
+                <a href="http://www.fbk.eu">
+                    <img id="logofbk" src="images/logo-fbk.png">
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <p class="text-center">This demo uses free software.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
