@@ -158,7 +158,7 @@ $(function () {
 
                 var fileJson = JSON.stringify(data, undefined, 4);
                 
-                $('#showJson').append(fileJson);
+                $('#showJson').text(fileJson);
 
                 language = data.readability.language;
                 $(".show-" + language).show();
@@ -289,6 +289,9 @@ $(function () {
                                 case "E":
                                     before += 'Preposition';
                                     break;
+                                case "E+RD":
+                                    before += 'Preposition';
+                                    break;
                                 case "F":
                                     before += 'Punctuation';
                                     break;
@@ -352,7 +355,26 @@ $(function () {
                             before += '<span class='+color+'><b>Lemma</b></span> : '+token.lemma+'<br>';
 
                             if(token.pos.includes("V")){
-                                before += '<span class='+color+'><b>Features</b></span> : <br>- '+ token.featuresText + ' <br>- ' + token.selected_morpho + '</em>';
+
+                                $.each(item.verbs, function (j, verb) {
+                                    
+                                    if(verb.tokens.includes(index) &&  verb.tokens[0] === index){
+
+                                        before += '<span class='+color+'><b>Features</b></span> : <br>- '+ token.featuresText + ' <br>- ' + token.selected_morpho + '</em><br>';
+    
+                                        before +='<span class='+color+'><b>isPassive</b></span> : '+verb.isPassive+'<br>';
+                                        before +='<span class='+color+'><b>Mood</b></span> : '+verb.mood+'<br>';
+                                        if(verb.person != undefined){
+                                            before +='<span class=color_v><b>Person</b></span> : '+verb.person+'<br>';
+                                        }
+                                                
+                                        if(verb.tense != undefined){
+                                            before +='<span class=color_v><b>Tense</b></span> : '+verb.tense+'<br>';
+                                        }
+                                        
+                                    }
+                                })
+
                             }else{
                                 before +='<span class='+color+'><b>Features</b></span> : '+ token.featuresText;
                             }
@@ -575,10 +597,11 @@ $(function () {
                     var row = $("<div></div>");
                     row.addClass("row");
                     row.addClass("row-sentence");
+                    
                     var ids = 0;
                     values.forEach(function (value) {
                         var inside = $("<div></div>");
-                        inside.addClass("col-md-3");
+                        inside.addClass("col-md-3 col-5");
                         var v = Math.round(value.v * 100) / 100;
                         var c = value.c;
                         if (isNaN(v)) {
