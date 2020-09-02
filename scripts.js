@@ -10,8 +10,8 @@ var gaugeOptions = {
     greenFrom: 80,
     greenTo: 100,
     minorTicks: 5,
-    width: 100,
-    height: 100
+    width: 110,
+    height: 110
 };
 var gaugeLevelsOptions = {
     redFrom: 0,
@@ -21,8 +21,8 @@ var gaugeLevelsOptions = {
     greenFrom: 80,
     greenTo: 100,
     minorTicks: 5,
-    width: 100,
-    height:100
+    width: 110,
+    height:110
 };
 /*var posChartOptions = {
     width: 500,
@@ -188,7 +188,7 @@ $(function () {
                         var pos=token.characterOffsetBegin;
                         var color;
 
-                        if (! token.pos.includes("F") && ! token.pos.includes("V") ) {
+                        if (token.pos != "FB") {
                             before = '<span tabindex="0" data-html="true" data-container="body" data-toggle="popover" role="button" title="Detailed information" class="word_hover my-popover label label-default ';
                             if (token.pos.startsWith('R')) {
                                 before += 'pos-r" ';
@@ -196,23 +196,27 @@ $(function () {
                                 before += 'pos-vm" ';
                             } else if (token.pos.startsWith('A')) {
                                 before += 'pos-a" ';
-                            } else if (token.pos.startsWith('E')) {
+                            }else if(token.pos.startsWith('B')){
+                                before += 'pos-b" ';
+                            }else if (token.pos.startsWith('E')) {
                                 before += 'pos-e" ';
                             } else if (token.pos.startsWith('N') || token.pos.startsWith('W')) {
                                 before += 'pos-nw" ';
                             } else if (token.pos.startsWith('D') || token.pos == 'CD') {
                                 before += 'pos-dcd" ';
-                            } else if (token.pos.startsWith('J')) {
-                                before += 'pos-j" ';
-                            } else if (token.pos.startsWith('T')) {
-                                before += 'pos-t" ';
-                            } else if (token.pos.startsWith('CC') || token.pos.startsWith('S')) {
-                                before += 'pos-ccs" ';
+                            } else if (token.pos.startsWith('S')) {
+                                before += 'pos-s" ';
+                            }else if (token.pos.startsWith('CC')) {
+                                before += 'pos-cc" ';
                             } else if (token.pos.startsWith('I')) {
                                 before += 'pos-ilsfw" ';
+                            }else if (token.pos.startsWith('P')) {
+                                before += 'pos-p" ';
                             } else if (token.pos == 'LS' || token.pos == 'FW') {
                                 before += 'pos-ilsfw" ';
-                            } else {
+                            }else if (token.pos.startsWith('F')){
+                                before += 'pos-f" ';
+                            }else {
                                 before += 'pos" ';
                             } 
                                     
@@ -222,10 +226,14 @@ $(function () {
                                 before += 'pos-r';
                                 color = 'color_r';
                             } else if (token.pos.startsWith('V') || token.pos.startsWith('M')) {
-                                before += 'pos-vm" ';
+                                before += 'pos-vm';
+                                color = 'color_v';
                             } else if (token.pos.startsWith('A')) {
                                 before += 'pos-a';
                                 color = 'color_a';
+                            }else if (token.pos.startsWith('B')) {
+                                before += 'pos-b';
+                                color = 'color_b';
                             } else if (token.pos.startsWith('E')) {
                                 before += 'pos-e';
                                 color = 'color_e';
@@ -235,24 +243,29 @@ $(function () {
                             } else if (token.pos.startsWith('D') || token.pos == 'CD') {
                                 before += 'pos-dcd';
                                 color = 'color_d';
-                            } else if (token.pos.startsWith('J')) {
-                                before += 'pos-j" ';
-                            } else if (token.pos.startsWith('T')) {
-                                before += 'pos-t" ';
-                            } else if (token.pos.startsWith('CC') || token.pos.startsWith('S')) {
-                                before += 'pos-ccs';
+                            } else if (token.pos.startsWith('S')) {
+                                before += 'pos-s';
                                 color = 'color_s';
+                            }else if (token.pos.startsWith('P')) {
+                                    before += 'pos-p';
+                                    color = 'color_p';
+                            } else if (token.pos.startsWith('CC')){
+                                before += 'pos-cc';
+                                color = 'color_cc';
                             } else if (token.pos.startsWith('I')) {
-                                before += 'pos-ilsfw" ';
+                                before += 'pos-ilsfw';
                             } else if (token.pos == 'LS' || token.pos == 'FW') {
                                 before += 'pos-ilsfw';
                                 color = 'color_b';
-                            } else {
+                            }else if (token.pos.startsWith('F')){
+                                before += 'pos-f';
+                                color = 'color_f';
+                            }else {
                                 before += 'pos';
-                                color = 'color_b';
+                                color = 'color_x';
                             }
 
-                            before += '>'+token.pos+' : ';
+                            before += '>'+token.pos +' : ';
 
                             switch (token.pos) {
                                 case "A":
@@ -261,12 +274,18 @@ $(function () {
                                 case "B":
                                     before += 'Adverb';
                                     break;
-                                case "C":
+                                case "BN":
+                                        before += 'Adverb';
+                                        break;
+                                case "CC":
                                     before += 'Conjunction';
                                     break;
-                                case "D":
+                                case "DQ":
                                     before += 'Adj. (det.)';
                                     break;
+                                case "DI":
+                                        before += 'Adj. (det.)';
+                                        break;
                                 case "E":
                                     before += 'Preposition';
                                     break;
@@ -293,6 +312,9 @@ $(function () {
                                     break;
                                 case "X":
                                     before += 'Other';
+                                    break;
+                                case "V":
+                                    before += 'Verb';
                                     break;
                                 default:
                                     before += 'Other';
@@ -327,7 +349,13 @@ $(function () {
                                 }
                             }
                             
-                            before += '<span class='+color+'><b>Lemma</b></span> : '+token.lemma+'<br><span class='+color+'><b>Features</b></span> : '+token.featuresText;
+                            before += '<span class='+color+'><b>Lemma</b></span> : '+token.lemma+'<br>';
+
+                            if(token.pos.includes("V")){
+                                before += '<span class='+color+'><b>Features</b></span> : <br>- '+ token.featuresText + ' <br>- ' + token.selected_morpho + '</em>';
+                            }else{
+                                before +='<span class='+color+'><b>Features</b></span> : '+ token.featuresText;
+                            }
 
                             if(token.derivation != undefined){
                                 before += '<br><span class='+color+'><b>Derivation</b></span> : <ul><li>'+ token.derivation.baseLemma + ' - <em>' + token.derivation.baseType + '</em></li>';
@@ -380,7 +408,7 @@ $(function () {
                             before += '">';
                             after = '</span>';
 
-                        }else if (token.pos.includes("V")){
+                        }/*else if (token.pos.includes("V")){
                             $.each(item.verbs, function (j, verb) {
                                 if(verb.tokens.includes(index) &&  verb.tokens[0] === index){
                                     var firstIndex = verb.tokens[0];
@@ -407,8 +435,8 @@ $(function () {
                                     before += '">';
                                     after = '</span>';
                                 }
-                            });
-                        }
+                            })
+                        }*/
  
                         var newText = simpText.substring(0, start);
                         newText += before;
@@ -620,7 +648,7 @@ $(function () {
 
                 var t = "", c = "";
                 var v;
-                var div;
+                /*var div;*/
 
                 v = mainValue;
                 if (v < gaugeLevelsOptions.yellowFrom) {
@@ -881,8 +909,8 @@ $(function () {
                         minorTicks: tick,
                         min: min,
                         max: max,
-                        width: 80,
-                        height: 80
+                        width: 90,
+                        height: 90
                     };
 
                     myChart.draw(google.visualization.arrayToDataTable([
