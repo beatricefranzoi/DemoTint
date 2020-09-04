@@ -73,78 +73,50 @@ function newInput(name, checked) {
     return input;
 }
 
-/*function updateSyntSimpText(i, lang) {
-    var c = $("#switch-" + i + "-main").prop("checked");
-    var orig = $("#origsentence" + i);
-    var synt = $("#syntsentence" + i);
-    var spinner = $("#spinner-" + i);
 
-    if (c) {
-        if (lang === "it") {
-            var comp = $("#switch-" + i + "-comp").prop("checked");
-
-            orig.hide();
-            synt.show();
-        }
-        else {
-            var comp = $("#switch-" + i + "-comp").prop("checked");
-            var conf = $("#switch-" + i + "-conf").prop("checked");
-
-            var data = {
-                text: orig.html(),
-                comp: comp ? "true" : "false",
-                conf: conf ? "true" : "false",
-                lang: language
-            };
-
-            spinner.show();
-
-            $.ajax("../syntsimp", {
-                dataType: "json",
-                method: "POST",
-                data: data,
-                success: function (data) {
-                    synt.removeClass();
-                    spinner.hide();
-                    if (data.isSyntSimplified) {
-                        synt.addClass("synt-simp-sent");
-                    }
-                    synt.html(data.syntSimplifiedVersion);
-
-                    orig.hide();
-                    synt.show();
-                }
-            });
-        }
+function caricaPaginaIniziale(addState) {
+	
+	var hash = "#/home/";
+	if (addState) {
+		history.pushState(hash, null, hash);
     }
-    else {
-        orig.show();
-        synt.hide();
-    }
-}*/
 
-$(function () {
+    $('#text').removeAttr("disabled");
+    $('button.has-spinner').removeClass('active');
+    $('button.has-spinner').removeClass('disabled');
+    
+    $("#part1").show();
+    $("#part2").hide();
 
-    $('[data-toggle="tooltip"]').tooltip()
+}
 
-    $('#select_examples').change(function () {
-        $('#text').val($('#select_examples').val());
-    });
+function caricaTesto(t, addState) {
 
-    $('button.has-spinner').click(function () {
+        // var url = $(this).data("dest");
+        var historyName = "/text/" + t + "/";
+        historyName = "#" + historyName;
 
-       var text = $('#text').val();
+        if (addState) {
+            history.pushState(historyName, null, historyName);
+        }
+
+        $("#statistics1").empty();
+        $("#statistics2").empty();
+        $("#difficulty-values-panel").empty();
+        $("#infoText").empty();
+        $("#annotations").empty();
+        $("#showJson").empty();
+
+        var text = t;
         if (text.length < 3) {
              alert("Enter some text");
              return false;
         }
 
-        $(this).toggleClass('active');
-        $(this).toggleClass('disabled');
+        $('button.has-spinner').toggleClass('active');
+        $('button.has-spinner').toggleClass('disabled');
         $('#text').attr('disabled', 'disabled');
 
-        //$.ajax("../simpform", {
-        //$.ajax("simp",{
         $.ajax("http://dh-server.fbk.eu:19003/simp-engines/tae/simpform", {
             dataType: "json",
             method: "POST",
@@ -1019,5 +991,70 @@ $(function () {
             }
         });
         return false;
+    
+}
+
+$(function () {
+
+    /*
+    console.log(location.href);
+    var parts= location.href.split("/");
+    if(parts[1] == "text")
+    {
+        console.log(parts[2]);
+        caricaTesto(parts[2],false);
+    }else{
+        caricaPaginaIniziale(true);
+    }
+
+    if (location.hash !== "") {
+          $("#v-pills-" + location.hash.substring(1) + "-tab").click();
+    } 
+    */
+
+   
+
+   caricaPaginaIniziale(true);
+
+    $(window).on("popstate", function(e) {	
+        var parts = e.originalEvent.state.split("/");
+		if (parts.length >= 3) {
+			if (parts[1] == "home") {
+				caricaPaginaIniziale(false)
+			}
+			if (parts[1] == "text") {
+                caricaTesto(parts[2],false);
+			}
+		}/*else if (parts[3] == "#linguistic-annotations") {
+				$("#file-json").click();
+		}*/
+
+    })
+
+    $('[data-toggle="tooltip"]').tooltip()
+
+    $('#select_examples').change(function () {
+        $('#text').val($('#select_examples').val());
     });
+
+    $('button.has-spinner').on("click", function(e) {
+        e.preventDefault();
+        var text = $('#text').val();
+
+        if (text.length < 3) {
+             alert("Enter some text");
+             return false;
+        }
+
+		caricaTesto(text, true);
+    });
+    
+    /*$("#nav-tab").on("click", "a", function(e) {
+        if (e.originalEvent === undefined) {
+          return;
+        }
+        var historyName =  history.state +  $(this).attr("href");
+        history.pushState(historyName, null, historyName);
+    });*/
+    
 });
