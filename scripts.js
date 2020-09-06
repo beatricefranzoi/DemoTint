@@ -270,7 +270,16 @@ function caricaTesto(t, addState) {
                                 case "N":
                                     before += 'Number';
                                     break;
-                                case "P":
+                                case "PC":
+                                    before += 'Pronoun';
+                                    break;
+                                case "PE":
+                                    before += 'Pronoun';
+                                    break;
+                                case "PI":
+                                    before += 'Pronoun';
+                                    break;
+                                case "PR":
                                     before += 'Pronoun';
                                     break;
                                 case "R":
