@@ -1,5 +1,5 @@
 body{
-    font-family: 'Barlow'; font-size: 18px;
+    font-family: 'Barlow', sans-serif;
 }
 
 #card{
@@ -60,42 +60,30 @@ h5{
     margin-top: 20px;
 }
 
+.tooltip {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+}
+
 .tooltip .tooltip-inner{
-    background-color: #d8d8fdf3;
-    max-width: 330px;
     color: black;  
-    font-size: 14px;
-    max-width: 350px;
 }
 
 .tooltip .info-success{
-    background-color:#BBE000;
-    color: black;  
+    background-color:#BBE000; 
 }
 
 .tooltip .info-danger{
     background-color: #FD5D35;
-    color: black;  
 }
 
 .tooltip .info-warning{
     background-color: #ffc300;
-    color: black;  
 }
 
 .popover{
     max-width: 50%; 
     font-family: 'Barlow'; font-size: 18px;
-}
-
-b{
-    
-    font-family: 'Kanit';
-    font-weight: bold;
-}
-
-.text{
-    font-size: 13px;
 }
 
 .danger{
@@ -151,8 +139,8 @@ b{
 }*/
 
 .sentence {
-    /*padding: 10px 5px;*/
     border-radius: 3px;
+    line-height: 1.8em;
 }
 
 
@@ -161,7 +149,7 @@ b{
     border-radius: 6px;
     margin: 10px 0;
     padding: 5px 3px 10px 3px;
-    background-color:#FCEEEF;
+    background-color: rgba(255, 218, 185, 0.454);
     line-height: 1.4em;  
 }
 
@@ -184,15 +172,30 @@ b{
     background-color: white;
 }
 
-/*.tab-content {
-    margin-bottom: 20px;
-    border-radius: 0 0 4px 4px;
-}*/
-
 .label {
     font-size: 100% !important;
     font-weight: normal !important;
 }
+
+@media (max-width: 575.98px) {
+    #statistics1{
+        font-size: 12px;
+    }
+    #statistics2{
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 575.98px) {
+    #statistics1{
+        font-size:14px;
+    }
+    #statistics2{
+        font-size:14px;
+    }
+}
+
+
 
 .spinner {
     opacity: 0;
@@ -264,11 +267,6 @@ b{
 .icon:hover{ 
     fill: #D02838;
     
-}
-
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    border-bottom-color: #D02838;
-    color: #D02838;
 }
 
 .badge-info{
@@ -467,6 +465,13 @@ b{
     font-size: 13px;
 }
 
+@media(max-width: 575px){
+    .row-small{
+        margin-left:-20px;
+    }
+}
+
+
 .s{
     font-size:12px; 
     border: 1px solid rgb(26, 68, 153); 
@@ -611,31 +616,24 @@ b{
     color: grey;
 }
 
-
-
 .nav-tabs .nav-link:hover {
+    color: #D02838;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
     color: #D02838;
     border-bottom-color: #D02838;
 }
 
 .nav-tabs .nav-link {
-    color: black;
+    color: gray;
+    font-weight: 500;
 }
 
 .card-title{
+    font-weight: 500;
     color: #D02838;
-}
-
-@media (max-width: 575.98px) {
-    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-        font-size: 13px;
-    }
-    .nav-tabs .nav-item.show .nav-link, .nav-tabs{
-        font-size: 13px;
-    }
-    .card-title{
-        font-size: 14px;
-    }
 }
 
 @media (max-width: 460px){
@@ -646,11 +644,12 @@ b{
         font-size: 9px;
     }
     .card-title{
-        font-size: 9px;
+        font-size: 10px;
     }
+   
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (min-width:  460px) and (max-width: 726px) { 
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
         font-size: 13px;
     }
@@ -658,11 +657,14 @@ b{
         font-size: 13px;
     }
     .card-title{
-        font-size: 13px;
+        font-size: 15px;
     }
+    
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) { 
+
+
+@media (min-width:  726px) and (max-width: 991.98px) { 
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
         font-size: 16px;
     }
@@ -681,17 +683,20 @@ b{
     }
 }
 
+.legenda-label{
+    margin-left:23px;
+}
+
+
 @media (min-width: 575.98px){ 
     .size{
         font-size: 14px;
-        margin-left: 8px;
     }
 }
 
 @media (max-width: 575.98px){ 
     .size{
         font-size: 12px;
-        /*margin-left: 8px;*/
     }
 }
 
@@ -719,11 +724,19 @@ b{
     }
 }
 
-#infoText{
-    line-height: 2em;
-}
-
 .p-4 {
     padding: 10px!important;
     margin-left: 20px;
 }
+
+@media (max-width: 650px){ 
+    .header-card{
+        font-size: 16px;
+    }
+}
+
+.header-card{
+    margin-left:10px;
+    font-weight: 500;
+}
+
