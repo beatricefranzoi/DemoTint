@@ -24,55 +24,6 @@ var gaugeLevelsOptions = {
     width: 110,
     height:110
 };
-/*var posChartOptions = {
-    width: 500,
-    height: 300,
-    orientation: "vertical",
-    legend: {
-        position: 'none'
-    }
-};*/
-
-var language;
-
-function changeView() {
-    var lang = $("#simp-select").val();
-    $(".simp-ff").css("display", "none");
-    $("#simp-" + lang).css("display", "block");
-    return false;
-}
-
-function escapeAttrNodeValue(value) {
-    return value.replace(/(&)|(")|(\u00A0)/g, function (match, amp, quote) {
-        if (amp) return "&amp;";
-        if (quote) return "&quot;";
-        return "&nbsp;";
-    });
-}
-
-function addLI(ul, title, value) {
-    var li = $("<li></li>");
-    li.addClass("list-group-item");
-    var span = $("<span></span>");
-    span.addClass("badge");
-    span.append(value);
-    li.append(span);
-    li.append(" " + title);
-    ul.append(li);
-}
-
-function newInput(name, checked) {
-    var input = $("<input>");
-    input.attr("type", "checkbox");
-    input.addClass("js-switch");
-    if (checked) {
-        input.attr("checked", "checked");
-    }
-    input.attr("name", name);
-    input.attr("id", "switch-" + name);
-    return input;
-}
-
 
 function caricaPaginaIniziale(addState) {
 	
@@ -90,7 +41,7 @@ function caricaPaginaIniziale(addState) {
 
 }
 
-function caricaTesto(t, addState) {
+function caricaContenuto(t, addState, tabName) {
 
         // var url = $(this).data("dest");
         var historyName = "/text/" + t + "/";
@@ -103,15 +54,12 @@ function caricaTesto(t, addState) {
         $("#statistics1").empty();
         $("#statistics2").empty();
         $("#difficulty-values-panel").empty();
+        
         $("#infoText").empty();
         $("#annotations").empty();
         $("#showJson").empty();
 
         var text = t;
-        if (text.length < 3) {
-             alert("Enter some text");
-             return false;
-        }
 
         $('button.has-spinner').toggleClass('active');
         $('button.has-spinner').toggleClass('disabled');
@@ -131,10 +79,6 @@ function caricaTesto(t, addState) {
                 var fileJson = JSON.stringify(data, undefined, 4);
                 
                 $('#showJson').text(fileJson);
-
-                language = data.readability.language;
-                $(".show-" + language).show();
-                // Show language
 
                 var infoLabel = $("<div></div>");
                 infoLabel.append('<p class="font-weight-bold size">Click on each word to get more information</p>'); 
@@ -314,7 +258,7 @@ function caricaTesto(t, addState) {
                                 if(data.readability.forms[pos] !== undefined){
                                     if(data.readability.forms[pos].start === token.characterOffsetBegin && data.readability.forms[pos].end === token.characterOffsetEnd)
                                     {
-                                        before += '<span class='+color+'><b>Definition</b></span> : '+ data.readability.forms[pos].description.description.replace('"', "'") + '<br>';
+                                        before += '<span class='+color+ 'font-weight-bold><strong>Definition</strong></span> : '+ data.readability.forms[pos].description.description.replace('"', "'") + '<br>';
                                     }
                                 }
                                 // Links
@@ -543,7 +487,7 @@ function caricaTesto(t, addState) {
                         t = "The relationship between meaningful words and functional words is <b>adequate</b>";
                     }else if (v > data.readability.maxYellowValues.density) {
                         c = "danger";
-                        t = "The relationship between meaningful words and functional words is <b>unbalanced</b>, it is advisable to decrease the use of nouns / verbs / adjectives / adverbs";
+                        t = "The relationship between meaningful words and functional words is <b>unbalanced</b>, it is advisable to decrease the use of nouns/verbs/adjectives/adverbs";
                     } else{
                         c = "warning";
                         t = "The relationship between meaningful words and functional words is <b>adequate</b>";
@@ -606,14 +550,11 @@ function caricaTesto(t, addState) {
                         $(value.id).tooltip({
                             template: "<div class='tooltip' role='tooltip'><div class='tooltip-inner "+value.class+"'></div></div>",
                             html: true,
+                            placement: 'bottom',
                             title: value.text});
                     })
                 });
 
-                /*$("#part2").tooltip({
-                    selector: ".my-tool",
-                    placement: 'right'
-                });*/
                 $("#part2").popover({
                     selector: ".my-popover",
                     trigger: "focus"
@@ -652,108 +593,89 @@ function caricaTesto(t, addState) {
 
                 var t = "", c = "";
                 var v;
-                /*var div;*/
 
                 v = mainValue;
                 if (v < gaugeLevelsOptions.yellowFrom) {
                     c = "danger";
-                    //t = "La sintassi di questo testo è complessa (comprensibile da un utente che abbia una scolarizzazione pari o superiore al diploma), si consiglia di semplificarla";
                     t = "<b>The syntax of this text is complex (understandable by a user who has a schooling equal to or greater than a diploma), it is advisable to simplify it</b>";
                 }
                 else if (v > gaugeLevelsOptions.yellowTo) {
                     c = "success";
-                    //t = "La sintassi di questo testo è semplice, adatta anche a un utente con licenza elementare";
                     t = "<b>The syntax of this text is very simple, suitable even for a user with an elementary license</b>";
                 }
                 else {
                     c = "warning";
-                    //t = "La sintassi di questo testo è piuttosto semplice, comprensibile da un utente con licenza media o superiore";
                     t = "<b>The syntax of this text is quite simple, understandable by a user with medium or higher license</b>";
                 }
 
                 $("#gauge-gulpease .gauge-description").tooltip({
                     template: "<div class='tooltip' role='tooltip'><div class='tooltip-inner info-"+c+"'></div></div>",
                     html: true,
-                    title: '<em>The gulpease is a readability index for the Italian language. It does not take into consideration the content of the text, but technical information such as the length of sentences and words: <br> - less than 80 means difficult for a person at elementary school; <br> - less than 60 means difficult for a person at medium school; <br> - less than 40 means difficult for a person at high school.</em><br><br>' + t 
+                    placement: 'bottom',
+                    title: 'The gulpease is a readability index for the Italian language. It does not take into consideration the content of the text, but technical information such as the length of sentences and words: less than 80 means difficult for a person at elementary school; less than 60 means difficult for a person at medium school; less than 40 means difficult for a person at high school.<br>' + t 
                 })
 
                 v = level1;
                 if (v < gaugeLevelsOptions.yellowFrom) {
                     c = "danger";
-                    //t = "Il vocabolario di base della lingua italiana è quasi assente da questo testo";
                     t = "<b>The basic vocabulary of the Italian language is almost absent from this text</b>";
                 }
                 else if (v > gaugeLevelsOptions.yellowTo) {
                     c = "success";
-                    //t = "Il lessico di questo testo è estremamente semplice";
                     t = "<b>The lexicon of this text is extremely simple</b>";
                 }
                 else {
                     c = "warning";
-                    //t = "Il lessico di questo testo contiene molte parole del vocabolario di base";
                     t = "<b>The lexicon of this text contains many words from the basic vocabulary</b>";
                 }
 
                 $("#gauge-level1 .gauge-description").tooltip({
                     template: "<div class='tooltip' role='tooltip'><div class='tooltip-inner info-"+c+"'></div></div>",
                     html: true,
-                    title: '<em>The Level1 gauge shows how difficult the text is for a user knowing only the 500 easiest words in Italian (elementary school).</em><br><br>' + t 
+                    placement: 'bottom',
+                    title: 'The Level1 gauge shows how difficult the text is for a user knowing only the 500 easiest words in Italian (elementary school).<br>' + t 
                 })
 
                 v = level2;
                 if (v < gaugeLevelsOptions.yellowFrom) {
                     c = "danger";
-                    //t = "Il vocabolario di alta frequenza della lingua italiana è praticamente assente da questo testo, si consiglia di semplificare alcuni termini";
                     t = "<b>The high-frequency vocabulary of the Italian language is practically absent from this text, it is advisable to simplify some terms</b>";
                 }
                 else if (v > gaugeLevelsOptions.yellowTo) {
                     c = "success";
-                    //t = "Il lessico di questo testo è piuttosto semplice";
                     t = "<b>The lexicon of this text is quite simple</b>";
                 }
                 else {
                     c = "warning";
-                    //t = "Il lessico di questo testo contiene molte parole del vocabolario di alta frequenza";
                     t = "<b>The lexicon of this text contains many words from the high frequency vocabulary</b>";
                 }
 
                 $("#gauge-level2 .gauge-description").tooltip({
                     template: "<div class='tooltip' role='tooltip'><div class='tooltip-inner info-"+c+"'></div></div>",
                     html: true,
-                    title: '<em>The Level2 gauge shows how difficult the text is for a user knowing only the 2500 easiest words in Italian (middle school).</em><br><br>'+t 
+                    placement: 'bottom',
+                    title: 'The Level2 gauge shows how difficult the text is for a user knowing only the 2500 easiest words in Italian (middle school).<br>'+t 
                 })
-
-                /*div = $("<div></div>");
-                div.addClass("text-center " + c);*/
-
-                //div.addClass("alert");
-                //div.addClass("box");
-                //div.addClass("alert-" + c);
-                
-                /*div.append(t);
-                $("#gauge-level2 .gauge-description").append(div);*/
 
                 v = level3;
                 if (v < gaugeLevelsOptions.yellowFrom) {
                     c = "danger";
-                    //t = "In questo testo le parole sono tutte molto complicate, si consiglia di semplificarle";
                     t = "<b>In this text the words are all very complicated, it is advisable to simplify them</b>";
                 }
                 else if (v > gaugeLevelsOptions.yellowTo) {
                     c = "success";
-                    //t = "Il lessico di questo testo contiene prevalentemente parole tra le 5mila più frequenti della lingua italiana";
                     t = "<b>The lexicon of this text mainly contains words among the 5 thousand most frequent in the Italian language</b>";
                 }
                 else {
                     c = "warning";
-                    //t = "Il lessico di questo testo contiene molte parole tra le 5mila più frequenti della lingua italiana";
                     t = "<b>The lexicon of this text contains many words among the 5 thousand most frequent in the Italian language</b>";
                 }
 
                 $("#gauge-level3 .gauge-description").tooltip({
                     template: "<div class='tooltip' role='tooltip'><div class='tooltip-inner info-"+c+"'></div></div>",
                     html: true,
-                    title: '<em>The Level3 gauge shows how difficult the text is for a user knowing only the 5000 easiest words in Italian (high school).</em><br><br>' + t 
+                    placement: 'bottom',
+                    title: 'The Level3 gauge shows how difficult the text is for a user knowing only the 5000 easiest words in Italian (high school).<br>' + t 
                 })
 
                 var row = $("<div></div>");
@@ -796,15 +718,12 @@ function caricaTesto(t, addState) {
                             description = "Semantic richness";
                             if (v < data.readability.minYellowValues.ttrValue) {
                                 c = "success";
-                                //t = "Il testo contiene poca variabilità semantica, quindi risulta comprensibile";
                                 t = "The text contains little semantic variability, so it is understandable";
                             }else if (v > data.readability.maxYellowValues.ttrValue) {
                                 c = "danger";
-                                //t = "Il testo è semanticamente troppo ricco, si consiglia di usare termini meno variegati";
                                 t = "The text is semantically too rich, it is advisable to use less varied terms";
                             }else {
                                 c = "warning";
-                                //t = "Il testo è piuttosto vario semanticamente, può risultare di difficile comprensione";
                                 t = "The text is quite varied semantically, it can be difficult to understand";
                             }
                             break;
@@ -812,15 +731,12 @@ function caricaTesto(t, addState) {
                             description = "Lexical density";
                             if (v < data.readability.minYellowValues.density) {
                                 c = "success";
-                                //t = "Il rapporto tra parole portatrici di significato e parole funzionali è adeguato";
                                 t = "The relationship between meaningful words and functional words is adequate";
                             }else if (v > data.readability.maxYellowValues.density) {
                                 c = "danger";
-                                //t = "Il rapporto tra parole di significato e parole funzionali è sbilanciato, si consiglia di aumentare l'uso di nomi/verbi/aggettivi/avverbi";
                                 t = "The relationship between meaning words and functional words is unbalanced, it is recommended to increase the use of nouns/verbs/adjectives/adverbs";
                             }else {
                                 c = "warning";
-                                //t = "Il rapporto tra parole portatrici di significato e parole funzionali è adeguato";
                                 t = "The relationship between meaningful words and functional words is adequate";
                             }
                             break;
@@ -828,15 +744,12 @@ function caricaTesto(t, addState) {
                             description = "Number of words per sentence";
                             if (v < data.readability.minYellowValues.wordsAvg) {
                                 c = "success";
-                                //t = "Il numero di parole per frase è adeguato";
                                 t = "The number of words per sentence is adequate";
                             }else if (v > data.readability.maxYellowValues.wordsAvg) {
                                 c = "danger";
-                                //t = "Il numero di parole per frase è troppo alto, si consiglia di togliere termini non necessari o a spezzare i periodi più lunghi";
                                 t = "The number of words per sentence is too high, it is advisable to remove unnecessary terms or to break longer periods";
                             }else {
                                 c = "warning";
-                                //t = "Il numero di parole per frase è abbastanza elevato, provare a togliere termini non necessari";
                                 t = "The number of words per sentence is quite high, try to remove unnecessary terms";
                             }
                             break;
@@ -844,40 +757,26 @@ function caricaTesto(t, addState) {
                             description = "Average depth of the parse tree";
                             if (v < data.readability.minYellowValues.deepAvg) {
                                 c = "success";
-                                //t = "La profondità media dell'albero sintattico è adeguata";
                                 t = "The average depth of the parse tree is adequate";
                             }else if (v > data.readability.maxYellowValues.deepAvg) {
                                 c = "danger";
-                                //t = "La profondità media dell'albero sintattico è troppo alta, si consiglia di spezzare la frase e semplificarne la struttura";
                                 t = "The average depth of the parse tree is too high, it is advisable to break the sentence and simplify its structure";
                             }else {
                                 c = "warning";
-                                //t = "La profondità media dell'albero sintattico è un po' alta, potrebbe essere utile spezzare la frase e semplificarne la struttura";
                                 t = "The average depth of the parse tree is a bit high, it may be useful to break the sentence and simplify its structure";
                             }
                             break;
                     }
 
                     var divName = key + "-gauge";
-                    /*var row = $("<div></div>");
-                    row.addClass("row justify-content-center");
-                    row.append(x"<div class='col-md-2' id='" + divName + "'>");
-                    row.append("<div class='col-md-8' id='" + divName + "-desc'><p class='title'></p><p class='suggestion'></p>");*/
-
                     row.append("<div class='space col-lg-4 col-md-2 col-sm-4 col-4 d-flex justify-content-around' id='" + divName + "'>");
-                    //row.append("<div class='col-md-3  d-flex justify-content-between align-items-center' id='" + divName + "-desc'><small><strong><p class='suggestion'></p></strong></small>");
-
                     $("#difficulty-values-panel ").append(row);
-                    //$("#difficulty-values-panel .panel-body #" + divName + "-desc .title").append(description);
-
-                    //$("#difficulty-values-panel .panel-body #" + divName + "-desc .suggestion").append(t);
-                    //$("#difficulty-values-panel .panel-body #" + divName + "-desc .suggestion").addClass("alert");
-                    //$("#difficulty-values-panel .panel-body #" + divName + "-desc .suggestion").addClass("alert-" + c);
 
                     $("#"+divName).tooltip({
                         template: "<div class='tooltip' role='tooltip'><div class='tooltip-inner info-"+c+"'></div></div>",
                         html: true,
-                        title: '<b>' + description + '</b><br><span class="text">' + t + '</span>'
+                        placement: 'top',
+                        title: '<b>' + description + '</b><br>' + t 
                     })
 
                     var myChart = new google.visualization.Gauge(document.getElementById(divName));
@@ -925,24 +824,11 @@ function caricaTesto(t, addState) {
                 });
 
                 // Statistics
-
                 $("#statistics1").append("<li class='list-group-item d-flex justify-content-between align-items-center'>"+"Sentences"+"<span class='badge badge-info badge-pill'>"+data.readability.sentenceCount+"</span></li>");
                 $("#statistics1").append("<li class='list-group-item d-flex justify-content-between align-items-center'>"+"Tokens"+"<span class='badge badge-info badge-pill'>"+data.readability.tokenCount+"</span></li>");
                 $("#statistics2").append("<li class='list-group-item d-flex justify-content-between align-items-center'>"+"Words"+"<span class='badge badge-info badge-pill'>"+data.readability.wordCount+"</span></li>");
                 $("#statistics2").append("<li class='list-group-item d-flex justify-content-between align-items-center'>"+"Content words"+"<span class='badge badge-info badge-pill'>"+data.readability.contentWordSize+"</span></li>");
-
-                //$("#legenda").append("<div class='col-lg-2 col-md-3 col-sm-3 col-10'><div class='panel panel-warning'><div class='panel-body'><p class='font-weight-bold text-muted size' style='margin-left: 23px;'>Legenda</p><ul class='legenda'><li><span class='a'>A</span> : Adjective</li><li><span class='b'>B</span> : Adverb</li><li><span class='s'>C</span> : Conjunction</li><li><span class='d'>D</span> : Adj. (det.)</li><li><span class='e'>E</span> : Preposition</li><li><span class='f'>F</span> : Punctuation</li><li><span class='n'>N</span> : Number</li><li><span class='f'>P</span> : Pronoun</li><li><span class='r'>R</span> : Determiner</li><li><span class='s'>S</span> : Noun</li><li><span class='v'>V</span> : Verb</li><li><span class='b'>X</span> : Other</li></ul></div></div></div>");
                     
-                // Pos chart
-
-                /*var posData = new google.visualization.DataTable();
-                posData.addColumn("string", "POS tag");
-                posData.addColumn("number", "Count");
-                $.each(data.readability.genericPosDescription, function (key, value) {
-                    var num = data.readability.genericPosStats.support[key];
-                    posData.addRow([value, num]);
-                });*/
-
                 // Stanford stuff
                 $.each(data.sentences, function (i, item) {
                     $.each(item.tokens.reverse(), function () {});  
@@ -975,7 +861,7 @@ function caricaTesto(t, addState) {
                     }
                     // (create the divs)
                     //                  div id      annotator     field_in_data                          label
-                    createAnnotationDiv('pos', 'pos', 'pos', 'Part-of-Speech');
+                    //createAnnotationDiv('pos', 'pos', 'pos', 'Part-of-Speech');
                     //createAnnotationDiv('lemma',    'lemma',      'lemma',                               'Lemmas'                  );
                     createAnnotationDiv('ner', 'ner', 'ner', 'Named Entity Recognition');
                     createAnnotationDiv('deps', 'depparse', 'basic-dependencies', 'Basic Dependencies');
@@ -990,6 +876,7 @@ function caricaTesto(t, addState) {
                     render(data);
                 }
 
+                caricaTabs(tabName);
                 $("#part2").show();
                     
                 // Load switchery
@@ -1000,28 +887,23 @@ function caricaTesto(t, addState) {
             }
         });
         return false;
-    
+}
+
+function caricaTabs(tabName) {
+    $("#"+tabName).tab('show');
 }
 
 $(function () {
-
-    /*
-    console.log(location.href);
-    var parts= location.href.split("/");
-    if(parts[1] == "text")
-    {
-        console.log(parts[2]);
-        caricaTesto(parts[2],false);
+    
+    /*var parts= location.href.split("/");
+    if(parts[1] == "text"){
+        caricaContenuto(parts[2],false);
     }else{
         caricaPaginaIniziale(true);
     }
-
     if (location.hash !== "") {
-          $("#v-pills-" + location.hash.substring(1) + "-tab").click();
-    } 
-    */
-
-   
+        $("#v-pills-" + location.hash.substring(1) + "-tab").click();
+    }*/
 
    caricaPaginaIniziale(true);
 
@@ -1032,15 +914,19 @@ $(function () {
 				caricaPaginaIniziale(false)
 			}
 			if (parts[1] == "text") {
-                caricaTesto(parts[2],false);
+                if(parts[3] == "#linguistic-annotations"){
+                    caricaTabs("linguistic-annotations-tab");       
+                    //caricaContenuto(parts[2],false, "linguistic-annotations-tab");
+                }else if(parts[3] == "#file-json-content"){
+                    caricaTabs("file-json");     
+                }else{
+                    caricaTabs("text-original");     
+                }
 			}
-		}/*else if (parts[3] == "#linguistic-annotations") {
-				$("#file-json").click();
-		}*/
-
+		}
     })
 
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
 
     $('#select_examples').change(function () {
         $('#text').val($('#select_examples').val());
@@ -1051,19 +937,17 @@ $(function () {
         var text = $('#text').val();
 
         if (text.length < 3) {
-             alert("Enter some text");
-             return false;
+            alert("Enter some text");
+            return false;
         }
 
-		caricaTesto(text, true);
+		caricaContenuto(text, true, "text-original");
     });
     
-    /*$("#nav-tab").on("click", "a", function(e) {
-        if (e.originalEvent === undefined) {
-          return;
-        }
-        var historyName =  history.state +  $(this).attr("href");
+    $("#nav-tab").on("click", "a", function(e) {
+        var parts=history.state.split("/");
+        var historyName =  parts[0] + "/" + parts[1] + "/" + parts[2] + "/" + $(this).attr("href");
         history.pushState(historyName, null, historyName);
-    });*/
+    });
     
 });
