@@ -14,7 +14,6 @@ body{
 
 #headerRow {
     height: 250px;
-    background: rgb(252,238,239);
     background: radial-gradient(circle, rgba(252,238,239,1) 0%, rgba(255,130,0,0.604079131652661) 100%);
 }
 
@@ -24,6 +23,7 @@ body{
 }
 
 h5{
+    margin-top: -40px;
     font-family: 'Patrick Hand';
     font-size: 20px;
     color: #d02838;
@@ -134,15 +134,10 @@ h5{
     display: none;
 }
 
-/*#text-original-content {
-    line-height: 2em;
-}*/
-
 .sentence {
     border-radius: 3px;
     line-height: 1.8em;
 }
-
 
 .sentence .row-sentence {
     font-size: 70%;
@@ -153,22 +148,28 @@ h5{
     line-height: 1.4em;  
 }
 
+.badge{
+    font-size: 85%;
+    height: 14px;
+}
+
 .badge-success {
-    font-size: 85% ;
+    margin-top: 3px;
     background-color: #BBE000;
 }
 
 .badge-danger {
-    font-size: 85%;
+    margin-top: 3px;
     background-color:#FD5D35;
 }
 
 .badge-warning {
-    font-size: 85% ;
+    margin-top: 3px;
     background-color: #ffc300;
 }
 
 .word_hover:hover {
+
     background-color: white;
 }
 
@@ -194,8 +195,6 @@ h5{
         font-size:14px;
     }
 }
-
-
 
 .spinner {
     opacity: 0;
@@ -243,10 +242,6 @@ h5{
 
 .it-list-wrapper{
     margin-top: 30px;
-}
-
-.space{
-    margin-top:10px;
 }
 
 .alert-success {
@@ -337,20 +332,14 @@ h5{
 .pos{
     background-color: #F7F7F7;
     border: 1px solid #D2D2D2; 
-    /*background-color: #FFE1DC;
-    border: 1px solid #FF8080; */
     color: black;
     border-radius: 6px;
     padding: .10em .2em;
 }
 
 .pos-p{
-    /*background-color: #E0FFFF;
-    border: 1px solid #00C1C2; */
     background-color: rgba(0, 255, 255, 0.29);
     border: 1px solid rgb(2, 191, 191);
-    /*background-color: #FFE1DC;
-    border: 1px solid #FF8080; */
     color: black;
     border-radius: 6px;
     padding: .10em .2em;
@@ -365,10 +354,6 @@ h5{
 }
 
 .pos-b{
-    /*background-color: #e0e0748c;
-    border: 1px solid #808000; */
-   /* background-color: rgba(144, 238, 144, 0.605);
-    border: 1px solid lightgreen;*/
     background-color: rgba(144, 238, 144, 0.605);
     border: 1px solid green;
     color: black;
@@ -377,10 +362,6 @@ h5{
 }
 
 .pos-vm{
-    /*background-color: #ADF6A2;
-    border: 1px solid rgb(32, 148, 14);*/
-   /* background-color: #E0FFBF;
-    border: 1px solid #00A000;*/
     background-color: rgba(172, 255, 47, 0.454);
     border: 1px solid rgb(141, 208, 40);
     color: black;
@@ -390,8 +371,6 @@ h5{
 
 .pos-f{
     margin-left: 2px;
-    /*background-color: #FFE0FF;
-    border: 1px solid #FF42F9; */
     background-color: rgba(255, 182, 193, 0.331);
     border: 1px solid lightpink; 
     color: black;
@@ -400,8 +379,6 @@ h5{
 }
 
 .pos-a{
-    /*background-color: #FFFDA8;
-    border: 1px solid rgb(169, 165, 0);*/
     background-color: #FFFFD0;
     border: 1px solid #FFE118;
     color: black;
@@ -410,7 +387,6 @@ h5{
 }
 
 .pos-e{
-    /*background-color: #FFE8BE;*/
     background-color: rgba(255, 166, 0, 0.351);
     border: 1px solid orange; 
     color: black;
@@ -442,12 +418,9 @@ h5{
     padding: .10em .2em;
 }
 
-.pos-cc{
-    /*background-color: lightcoral;*/
+.pos-c{
     border: 1px solid rgb(228, 95, 95);
     background-color: #f74e4245;
-    /*border: 1px solid #C21212; */
-
     color: black;
     border-radius: 6px;
     padding: .10em .2em;
@@ -462,7 +435,7 @@ h5{
 }
 
 .legenda{
-    font-size: 13px;
+    font-size: 11px;
 }
 
 @media(max-width: 575px){
@@ -473,11 +446,11 @@ h5{
 
 
 .s{
-    font-size:12px; 
+    font-size:11px; 
     border: 1px solid rgb(26, 68, 153); 
     background-color: #E0F1FF; 
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .a{
@@ -485,39 +458,39 @@ h5{
     border: 1px solid #FFE118;
     background-color: #FFFFD0;
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .b{
-    font-size:12px; 
+    font-size:11px; 
     background-color: rgba(144, 238, 144, 0.605);
     border: 1px solid green;
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .f{
-    font-size:12px; 
+    font-size:11px; 
     border: 1px solid #FF42F9; 
     background-color: #FFE0FF; 
     border-radius: 2px; 
-    padding: 1px 1.4px;
+    padding: 0px 1.4px;
 }
 
 .x{
-    font-size:12px; 
+    font-size:11px; 
     border: 1px solid #D2D2D2; 
     background-color: #F7F7F7; 
     border-radius: 2px; 
-    padding: 1px 1.4px;
+    padding: 0px 1.4px;
 }
 
 .e{
-    font-size:12px; 
+    font-size:11px; 
     background-color: rgba(255, 166, 0, 0.351);
     border: 1px solid orange; 
     border-radius: 2px; 
-    padding: 1px 1.4px;
+    padding: 0px 1.4px;
 }
 
 .v{
@@ -525,15 +498,15 @@ h5{
     background-color: rgba(172, 255, 47, 0.454);
     border: 1px solid rgb(141, 208, 40);
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .r{
-    font-size:12px; 
+    font-size:11px; 
     border: 1px solid rgb(100, 26, 153);
     background-color: #E8E0FF;
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .n{
@@ -541,7 +514,7 @@ h5{
     border: 1px solid rgb(169, 165, 0);
     background-color: FFFDA8;
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .d{
@@ -549,7 +522,7 @@ h5{
     border: 1px solid #603181;
     background-color: #e29fdd90;
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .p{
@@ -557,7 +530,7 @@ h5{
     background-color: rgba(0, 255, 255, 0.29);
     border: 1px solid rgb(2, 191, 191);
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .c{
@@ -565,7 +538,7 @@ h5{
     border: 1px solid rgb(228, 95, 95);
     background-color: #f74e4245;
     border-radius: 2px; 
-    padding: 1px 1px;
+    padding: 0px 1px;
 }
 
 .color_p{
@@ -577,7 +550,7 @@ h5{
 }
 
 .color_f{
-    color: #FF42F9; 
+    color: pink; 
 }
 
 .color_v{
@@ -608,7 +581,7 @@ h5{
     color:rgb(26, 68, 153); 
 }
 
-.color_cc{
+.color_c{
     color:rgb(228, 95, 95); 
 }
 
@@ -661,8 +634,6 @@ h5{
     }
     
 }
-
-
 
 @media (min-width:  726px) and (max-width: 991.98px) { 
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
@@ -740,3 +711,8 @@ h5{
     font-weight: 500;
 }
 
+@media(min-width: 992px){
+    .top{
+        margin-top:10px;
+    }
+}
