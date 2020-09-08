@@ -1,5 +1,4 @@
 google.charts.load('current', {'packages': ['corechart', 'gauge', 'bar']});
-
 var skipLT = ["ST_02_001", "ER_01_001", "ER_01_002", "ER_01_003", "ER_01_004"];
 
 var gaugeOptions = {
@@ -118,12 +117,12 @@ function caricaContenuto(t, addState, tabName) {
                                 before += 'pos-e" ';
                             } else if (token.pos.startsWith('N') || token.pos.startsWith('W')) {
                                 before += 'pos-nw" ';
-                            } else if (token.pos.startsWith('D') || token.pos == 'CD') {
+                            } else if (token.pos.startsWith('D')) {
                                 before += 'pos-dcd" ';
                             } else if (token.pos.startsWith('S')) {
                                 before += 'pos-s" ';
-                            }else if (token.pos.startsWith('CC')) {
-                                before += 'pos-cc" ';
+                            }else if (token.pos.startsWith('C')) {
+                                before += 'pos-c" ';
                             } else if (token.pos.startsWith('I')) {
                                 before += 'pos-ilsfw" ';
                             }else if (token.pos.startsWith('P')) {
@@ -156,7 +155,7 @@ function caricaContenuto(t, addState, tabName) {
                             } else if (token.pos.startsWith('N') || token.pos.startsWith('W')) {
                                 before += 'pos-nw';
                                 color = 'color_n';
-                            } else if (token.pos.startsWith('D') || token.pos == 'CD') {
+                            } else if (token.pos.startsWith('D')) {
                                 before += 'pos-dcd';
                                 color = 'color_d';
                             } else if (token.pos.startsWith('S')) {
@@ -165,9 +164,9 @@ function caricaContenuto(t, addState, tabName) {
                             }else if (token.pos.startsWith('P')) {
                                     before += 'pos-p';
                                     color = 'color_p';
-                            } else if (token.pos.startsWith('CC')){
-                                before += 'pos-cc';
-                                color = 'color_cc';
+                            } else if (token.pos.startsWith('C')){
+                                before += 'pos-c';
+                                color = 'color_c';
                             } else if (token.pos.startsWith('I')) {
                                 before += 'pos-ilsfw';
                             } else if (token.pos == 'LS' || token.pos == 'FW') {
@@ -183,70 +182,31 @@ function caricaContenuto(t, addState, tabName) {
 
                             before += '>'+token.pos +' : ';
 
-                            switch (token.pos) {
-                                case "A":
-                                    before += 'Adjective';
-                                    break;
-                                case "B":
-                                    before += 'Adverb';
-                                    break;
-                                case "BN":
-                                        before += 'Adverb';
-                                        break;
-                                case "CC":
-                                    before += 'Conjunction';
-                                    break;
-                                case "DQ":
-                                    before += 'Adj. (det.)';
-                                    break;
-                                case "DI":
-                                        before += 'Adj. (det.)';
-                                        break;
-                                case "E":
-                                    before += 'Preposition';
-                                    break;
-                                case "E+RD":
-                                    before += 'Preposition';
-                                    break;
-                                case "F":
-                                    before += 'Punctuation';
-                                    break;
-                                case "N":
-                                    before += 'Number';
-                                    break;
-                                case "PC":
-                                    before += 'Pronoun';
-                                    break;
-                                case "PE":
-                                    before += 'Pronoun';
-                                    break;
-                                case "PI":
-                                    before += 'Pronoun';
-                                    break;
-                                case "PR":
-                                    before += 'Pronoun';
-                                    break;
-                                case "R":
-                                    before += 'Determiner';
-                                    break;
-                                case "RI":
-                                    before += 'Determiner';
-                                    break;
-                                case "RD":
-                                    before += 'Determiner';
-                                    break;
-                                case "S":
-                                    before += 'Noun';
-                                    break;
-                                case "X":
-                                    before += 'Other';
-                                    break;
-                                case "V":
-                                    before += 'Verb';
-                                    break;
-                                default:
-                                    before += 'Other';
-                                    break;
+
+                            if (token.pos.startsWith('A')) {
+                                before += 'Adjective';
+                            } else if (token.pos.startsWith('B')) {
+                                before += 'Adverb';
+                            } else if (token.pos.startsWith('C')) {
+                                before += 'Conjunction';
+                            }else if (token.pos.startsWith('D')) {
+                                before += 'Adj. (det.)';
+                            } else if (token.pos.startsWith('E')) {
+                                before += 'Preposition';
+                            } else if (token.pos.startsWith('F')) {
+                                before += 'Punctuation';
+                            } else if (token.pos.startsWith('P')) {
+                                before += 'Pronoun';
+                            } else if (token.pos.startsWith('R')) {
+                                before += 'Determiner';
+                            }else if (token.pos.startsWith('S')) {
+                                before += 'Noun';
+                            } else if (token.pos.startsWith('V')){
+                                before += 'Verb';
+                            }/*else if (token.pos.startsWith('N')) {
+                                before += 'Number';
+                            }*/else {
+                                before += 'Other';
                             }
 
                             before += '</span><br><br>';
@@ -493,7 +453,11 @@ function caricaContenuto(t, addState, tabName) {
                         t = "The relationship between meaningful words and functional words is <b>adequate</b>";
                     }
                     values.push({l: l, v: v, c: c, t: t});
-                    v = 1.0 * item.literalWords / item.verbs.length;
+                    if(item.verbs.length == 0){
+                        v= item.literalWords;
+                    }else{
+                        v = 1.0 * item.literalWords / item.verbs.length;
+                    }
                     l = "Words per sentence";
                     if (v < data.readability.minYellowValues.wordsAvg) {
                         c = "success";
@@ -526,7 +490,7 @@ function caricaContenuto(t, addState, tabName) {
                     var ids = 0;
                     values.forEach(function (value) {
                         var inside = $("<div></div>");
-                        inside.addClass("col-md-3 col-5");
+                        inside.addClass("col-lg-3 col-md-6 col-6 d-flex justify-content-between");
                         var v = Math.round(value.v * 100) / 100;
                         var c = value.c;
                         if (isNaN(v)) {
@@ -769,7 +733,7 @@ function caricaContenuto(t, addState, tabName) {
                     }
 
                     var divName = key + "-gauge";
-                    row.append("<div class='space col-lg-4 col-md-2 col-sm-4 col-4 d-flex justify-content-around' id='" + divName + "'>");
+                    row.append("<div class='top col-lg-4 col-md-2 col-sm-4 col-4 d-flex justify-content-around' id='" + divName + "'>");
                     $("#difficulty-values-panel ").append(row);
 
                     $("#"+divName).tooltip({
@@ -862,16 +826,9 @@ function caricaContenuto(t, addState, tabName) {
                     // (create the divs)
                     //                  div id      annotator     field_in_data                          label
                     //createAnnotationDiv('pos', 'pos', 'pos', 'Part-of-Speech');
-                    //createAnnotationDiv('lemma',    'lemma',      'lemma',                               'Lemmas'                  );
                     createAnnotationDiv('ner', 'ner', 'ner', 'Named Entity Recognition');
                     createAnnotationDiv('deps', 'depparse', 'basic-dependencies', 'Basic Dependencies');
-                    // createAnnotationDiv('deps2',    'depparse',   'enhanced-plus-plus-dependencies',     'Enhanced++ Dependencies' );
-                    // createAnnotationDiv('openie',   'openie',     'openie',                              'Open IE'                 );
-                    // createAnnotationDiv('coref',    'coref',      'corefs',                              'Coreference'             );
-                    // createAnnotationDiv('entities', 'entitylink', 'entitylink',                          'Wikidict Entities'       );
-                    // createAnnotationDiv('kbp',      'kbp',        'kbp',                                 'KBP Relations'           );
-                    // createAnnotationDiv('sentiment','sentiment',  'sentiment',                           'Sentiment'               );
-
+                    
                     // Render
                     render(data);
                 }
@@ -894,7 +851,7 @@ function caricaTabs(tabName) {
 }
 
 $(function () {
-    
+
     /*var parts= location.href.split("/");
     if(parts[1] == "text"){
         caricaContenuto(parts[2],false);
