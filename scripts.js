@@ -1,5 +1,4 @@
 google.charts.load('current', {'packages': ['corechart', 'gauge', 'bar']});
-var skipLT = ["ST_02_001", "ER_01_001", "ER_01_002", "ER_01_003", "ER_01_004"];
 
 var gaugeOptions = {
     redFrom: 0,
@@ -22,7 +21,7 @@ var gaugeLevelsOptions = {
     minorTicks: 5,
     width: 110,
     height:110
-};
+};      
 
 function caricaPaginaIniziale(addState) {
 	
@@ -236,46 +235,51 @@ function caricaContenuto(t, addState, tabName) {
                                     before += '<span class='+color+'><b>Lexical simplifications</b></span> : '+ token.simplifiedVersion.replace('"', "'") + '<br>' ;
                                 }
                             }
-                            
-                            before += '<span class='+color+'><b>Lemma</b></span> : '+token.lemma+'<br>';
 
-                            if(token.pos.includes("V")){
+                            if(!token.pos.startsWith('F')){
+                                before += '<span class='+color+'><b>Lemma</b></span> : '+token.lemma+'<br>';
+                                before +='<span class='+color+'><b>Hyphenation</b></span> : '+token.hyphenation+'<br>';
 
-                                $.each(item.verbs, function (j, verb) {
-                                    
-                                    if(verb.tokens.includes(index) &&  verb.tokens[0] === index){
+                                if(token.pos.includes("V")){
 
-                                        before += '<span class='+color+'><b>Features</b></span> : <br>- '+ token.featuresText + ' <br>- ' + token.selected_morpho + '</em><br>';
-    
-                                        before +='<span class='+color+'><b>isPassive</b></span> : '+verb.isPassive+'<br>';
-                                        before +='<span class='+color+'><b>Mood</b></span> : '+verb.mood+'<br>';
-                                        if(verb.person != undefined){
-                                            before +='<span class=color_v><b>Person</b></span> : '+verb.person+'<br>';
-                                        }
-                                                
-                                        if(verb.tense != undefined){
-                                            before +='<span class=color_v><b>Tense</b></span> : '+verb.tense+'<br>';
-                                        }
+                                    $.each(item.verbs, function (j, verb) {
                                         
-                                    }
-                                })
+                                        if(verb.tokens.includes(index) &&  verb.tokens[0] === index){
 
-                            }else{
-                                before +='<span class='+color+'><b>Features</b></span> : '+ token.featuresText;
+                                            before += '<span class='+color+'><b>Features</b></span> : <br> &middot; '+ token.featuresText + ' <br> &middot; ' + token.selected_morpho + ' <br> &middot; isPassive : ' + verb.isPassive + ' <br> &middot; Mood : ' + verb.mood;
+                                            //before +='<span class='+color+'><b>isPassive</b></span> : '+verb.isPassive+'<br>';
+                                            //before +='<span class='+color+'><b>Mood</b></span> : '+verb.mood+'<br>';
+                                            if(verb.person != undefined){
+                                                before += ' <br> &middot; Person : ' + verb.person;
+                                                //before +='<span class=color_v><b>Person</b></span> : '+verb.person+'<br>';
+                                            }
+                                                    
+                                            if(verb.tense != undefined){
+                                                before += ' <br> &middot; Tense : ' + verb.tense;
+                                                //before +='<span class=color_v><b>Tense</b></span> : '+verb.tense;
+                                            }
+
+                                            before += '</em>';
+                                            
+                                        }
+                                    })
+
+                                }else{
+                                    before +='<span class='+color+'><b>Features</b></span> : '+ token.featuresText;
+                                }
+
+                                if(token.derivation != undefined){
+                                    before += '<br><span class='+color+'><b>Derivation</b></span> : <ul><li>'+ token.derivation.baseLemma + ' - <em>' + token.derivation.baseType + '</em></li>';
+                                    token.derivation.phases.forEach(function (phase) {
+                                        before += '<li>'+phase.affix + ' - <em>' + phase.type + '</em></li>';
+                                    });
+
+                                    before += '</ul>';
+                                }else{
+                                    before +='<br><br>';
+                                }
                             }
 
-                            if(token.derivation != undefined){
-                                before += '<br><span class='+color+'><b>Derivation</b></span> : <ul><li>'+ token.derivation.baseLemma + ' - <em>' + token.derivation.baseType + '</em></li>';
-                                token.derivation.phases.forEach(function (phase) {
-                                    before += '<li>'+phase.affix + ' - <em>' + phase.type + '</em></li>';
-                                });
-
-                                before += '</ul>';
-                            }else{
-                                before +='<br>';
-                            }
-
-                            before +='<span class='+color+'><b>Hyphenation</b></span> : '+token.hyphenation+'<br><br>';
                             var color;
                                     
                             if(token.difficultyLevel == undefined || token.difficultyLevel == 4){
@@ -525,7 +529,7 @@ function caricaContenuto(t, addState, tabName) {
                     //trigger: "click"
                 });
 
-                // Gauges
+                // Gauges          
 
                 var mainValue = data.readability.measures.main;
                 var mainName = data.readability.labels.main;
@@ -740,7 +744,7 @@ function caricaContenuto(t, addState, tabName) {
                         template: "<div class='tooltip' role='tooltip'><div class='tooltip-inner info-"+c+"'></div></div>",
                         html: true,
                         placement: 'top',
-                        title: '<b>' + description + '</b><br>' + t 
+                        title: description + '<br><b>' + t + '</b>'
                     })
 
                     var myChart = new google.visualization.Gauge(document.getElementById(divName));
@@ -882,8 +886,6 @@ $(function () {
 			}
 		}
     })
-
-    $('[data-toggle="tooltip"]').tooltip();
 
     $('#select_examples').change(function () {
         $('#text').val($('#select_examples').val());
