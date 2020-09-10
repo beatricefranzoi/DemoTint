@@ -67,6 +67,7 @@ h5{
 
 .tooltip .tooltip-inner{
     color: black;  
+   
 }
 
 .tooltip .info-success{
@@ -83,7 +84,15 @@ h5{
 
 .popover{
     max-width: 50%; 
-    font-family: 'Barlow'; font-size: 18px;
+    font-family: 'Barlow';
+}
+
+.popover .popover-body {
+    color: black;
+}
+
+.popover .popover-header{
+    color: black;
 }
 
 .danger{
@@ -658,15 +667,20 @@ h5{
     margin-left:23px;
 }
 
-
 @media (min-width: 575.98px){ 
     .size{
+        font-size: 14px;
+    }
+    h6{
         font-size: 14px;
     }
 }
 
 @media (max-width: 575.98px){ 
     .size{
+        font-size: 12px;
+    }
+    h6{
         font-size: 12px;
     }
 }
@@ -675,23 +689,15 @@ h5{
     background-color: transparent;
 }
 
-.popover .popover-body {
-    color: black;
-}
-
-.popover .popover-header{
-    color: black;
-}
-
 @media (min-width: 576px) and (max-width: 991.98px) {
     #showJson{
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 575.98px){ 
     #showJson{
-        font-size: 12px;
+        font-size: 9px;
     }
 }
 
