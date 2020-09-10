@@ -453,7 +453,6 @@ h5{
     }
 }
 
-
 .s{
     font-size:11px; 
     border: 1px solid rgb(26, 68, 153); 
@@ -628,7 +627,6 @@ h5{
     .card-title{
         font-size: 10px;
     }
-   
 }
 
 @media (min-width:  460px) and (max-width: 726px) { 
@@ -640,8 +638,7 @@ h5{
     }
     .card-title{
         font-size: 15px;
-    }
-    
+    }  
 }
 
 @media (min-width:  726px) and (max-width: 991.98px) { 
@@ -651,7 +648,6 @@ h5{
     .nav-tabs .nav-item.show .nav-link, .nav-tabs{
         font-size: 16px;
     }
-    
 }
 
 @media (min-width: 992px){
