@@ -11,12 +11,13 @@
     <link rel="icon" href="./images/favicon.ico">
 
     <!-- Google Fonts-->
-    <link href='https://fonts.googleapis.com/css?family=Barlow' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Patrick Hand' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;700&display=swap" rel="stylesheet">
 
+    <!--Icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="./bootstrap-italia.min.css">
-    <!--<script>window.__PUBLIC_PATH__ = '/Users/beatrice/Desktop/bootstrap-italia/fonts'</script>-->
     <script src="./bootstrap-italia.bundle.min.js"></script>
     <link rel="stylesheet" href="switchery.min.css" />    
 
@@ -33,7 +34,6 @@
 </head>
 
 <body>
-
     <div class="row" id="headerRow">
             <div class="col-12 d-flex justify-content-center">
                 <img id="logo" src="images/logoTint.png">
@@ -44,11 +44,11 @@
     </div>
 
     <div id="part1">
-        <div class="lightgrey-bg-c1 row justify-content-center">
-            <div class="col-lg-8 col-sm-8 col-11">
-                <div class="card" id="card" style='margin-top:-50px; border-radius: 20px;'>
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9 col-sm-9 col-10">
+                <div class="card" id="card" style="margin-top:-50px; border-radius: 10px;">
                     <div class="card-body">
-                        <p class="header-card">Insert a text in Italian and press the blue button:</p>  
+                        <p class="header-card">Insert a text in Italian and press the red button:</p>  
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <textarea class="form-control area_testo" id="text" rows="10"></textarea>
@@ -66,10 +66,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group" style='margin-top: -20px; margin-left:10px'>
+                            <div class="form-group" style="margin-left:10px; margin-top:-60px;">
                                 <div class="text-right button_invia">
-                                    <button class="btn click-btn has-spinner text-white" type="submit" style="background-color: #D02838;">
-                                    Process text  
+                                    <button class="btn btn-sm btn-grad has-spinner" type="submit">
+                                    Process text
                                     <div class="spinner progress progress-indeterminate">
                                         <div class="progress-bar" role="progressbar"></div>
                                     </div>
@@ -84,11 +84,11 @@
     </div>
 
     <div id="part2" class="inactive">
-        <div class="row lightgrey-bg-c1 justify-content-center">
-            <div class="col-lg-6 col-md-10 col-sm-10 col-11" >
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-10 col-sm-10 col-10" >
                 <!--start card-->
                 <div class="card-wrapper card-space" style='margin-top:-50px;'>
-                    <div class="card border-card" id="card" style='border-radius: 20px;'>
+                    <div class="card border-card" id="card" style='border-radius: 10px;'>
                         <div class="card-body">
                             <div class="card-title">
                                 <span>GENERAL INFORMATIONS</span>
@@ -111,8 +111,8 @@
                                             </div>
                                         </div>
                                         <div class="row d-flex justify-content-end">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-3">
-                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px; "><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-2" style="margin-top:-28px;">
+                                                <i class="gauge-description fa fa-info" ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -126,8 +126,8 @@
                                             </div>
                                         </div>
                                         <div class="row d-flex justify-content-end">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-3" >
-                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-2" style="margin-top:-28px;">
+                                                <i class="gauge-description fa fa-info" ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -141,8 +141,8 @@
                                             </div>
                                         </div>
                                         <div class="row d-flex justify-content-end">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-3">
-                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-2" style="margin-top:-28px;">
+                                                <i class="gauge-description fa fa-info" ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -156,8 +156,8 @@
                                             </div>
                                         </div>
                                         <div class="row d-flex justify-content-end">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-3">
-                                                <svg class="icon gauge-description" style="width: 22px; margin-top:-60px;"><use xlink:href="svg/sprite.svg#it-info-circle"></use></svg>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-2" style="margin-top:-28px;">
+                                                <i class="gauge-description fa fa-info" ></i>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@
                 <!--end card-->
             </div>          
 
-            <div class="col-lg-4 col-md-10 col-sm-10 col-11" id="l-col">
+            <div class="col-lg-4 col-md-10 col-sm-10 col-10" id="l-col">
                 <!--start card-->
                 <div class="card-wrapper card-space" style='margin-top:-50px;'>
                     <div class="card border-card" id="card" style='border-radius: 20px;'>
@@ -185,56 +185,96 @@
             </div>
         </div>
 
-        <div class="row lightgrey-bg-c1 justify-content-center">
-            <div class="col-lg-10 col-md-10 col-sm-10 col-11">
+        <div class="row justify-content-center" >
+            <div class="col-lg-10 col-md-10 col-sm-10 col-10" id="l-col">
+                <!--start card-->
                 <div class="card-wrapper card-space" style='margin-top:-50px;'>
                     <div class="card border-card" id="card" style='border-radius: 20px;'>
                         <div class="card-body">
-                            <nav>
-                                <div class="nav nav-tabs col-12" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link col-lg-4 col-md-4 col-sm-4 col-4" id="text-original" data-toggle="tab" href="#text-original-content" role="tab" aria-controls="text-original-content" aria-selected="true">PART OF SPEECH</a>
-                                <a class="nav-item nav-link col-lg-4 col-md-5 col-sm-5 col-6" id="linguistic-annotations-tab" data-toggle="tab" href="#linguistic-annotations" role="tab" aria-controls="linguistic-annotations" aria-selected="false">LINGUISTIC ANNOTATIONS</a>
-                                <a class="nav-item nav-link col-lg-4 col-md-3 col-sm-3 col-2" id="file-json" data-toggle="tab" href="#file-json-content" role="tab" aria-controls="file-json-content" aria-selected="true">JSON FILE</a>
-                                </div>
-                            </nav>
-
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane p-4 fade show" id="text-original-content" role="tabpanel" aria-labelledby="text-original">
-                                    <div class="row" style="margin-left:-30px;">
-                                        <div class="col-lg-10 col-md-9 col-sm-8 col-12">
-                                            <div id="infoText"></div>
-                                        </div> 
-                                        <div class="col-lg-2 col-md-3 col-sm-4 col-12 row-small">
-                                            <p class="font-weight-bold size legenda-label">Legend</p>
-                                            <ul class="legenda">
-                                                <li><span class="a">A</span> : Adjective</li>
-                                                <li><span class="b">B</span> : Adverb</li>
-                                                <li><span class="c">C</span> : Conjunction</li>
-                                                <li><span class="d">D</span> : Adj. (det.)</li>
-                                                <li><span class="e">E</span> : Preposition</li>
-                                                <li><span class="f">F</span> : Punctuation</li>
-                                                <li><span class="p">P</span> : Pronoun</li>
-                                                <li><span class="r">R</span> : Determiner</li>
-                                                <li><span class="s">S</span> : Noun</li>
-                                                <li><span class="v">V</span> : Verb</li>
-                                                <li><span class="x">X</span> : Other</li>
-                                            </ul>
+                            <ul id="nav-tab" role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
+                                <li class="nav-item flex-sm-fill">
+                                  <a id="text-original" data-toggle="tab" role="tab" href="#text-original-content" aria-controls="text-original-content" aria-selected="true" class="nav-link border-0 text-uppercase active">Linguistic annotations</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                  <a id="file-json" data-toggle="tab" href="#file-json-content" role="tab" aria-controls="file-json-content" aria-selected="false" class="nav-link border-0 text-uppercase">File JSON</a>
+                                </li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div id="text-original-content" role="tabpanel" aria-labelledby="text-original" class="tab-pane fade px-3 py-5 show active">
+                                    <div class="col-lg-12 col-12 px-0 mb-5">
+                                        <!-- Collapse Panel 1-->
+                                        <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="true" aria-controls="collapseExample1" class="btn btn-pos btn-block py-2 shadow-sm with-chevron" style="border-radius: 30px;">
+                                            <p class="d-flex justify-content-between mb-0 px-1 py-2"><strong class="text-uppercase">Part of speech</strong><i class="fa fa-angle-down"></i></p>
+                                        </a>
+                                        <div id="collapseExample1" class="show">
+                                            <div class="row" style="margin-left:20px; margin-top:20px;">
+                                                <div class="col-lg-10 col-md-9 col-sm-8 col-11">
+                                                    <div id="infoText"></div>
+                                                </div> 
+                                                <div class="col-lg-2 col-md-3 col-sm-4 col-12 row-small">
+                                                    <p class="font-weight-bold size legenda-label">Legend</p>
+                                                    <ul class="legenda">
+                                                        <li><span class="a">A</span> : Adjective</li>
+                                                        <li><span class="b">B</span> : Adverb</li>
+                                                        <li><span class="c">C</span> : Conjunction</li>
+                                                        <li><span class="d">D</span> : Adj. (det.)</li>
+                                                        <li><span class="e">E</span> : Preposition</li>
+                                                        <li><span class="f">F</span> : Punctuation</li>
+                                                        <li><span class="p">P</span> : Pronoun</li>
+                                                        <li><span class="r">R</span> : Determiner</li>
+                                                        <li><span class="s">S</span> : Noun</li>
+                                                        <li><span class="v">V</span> : Verb</li>
+                                                        <li><span class="x">X</span> : Other</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane p-4 fade" id="linguistic-annotations" role="tabpanel" aria-labelledby="linguistic-annotations-tab">
-                                    <div class="row" style="margin-left:-30px;">
-                                        <div class="col-lg-11 col-md-11 col-sm-11 col-12">
-                                            <div class="panel panel-warning">
-                                                <div class="panel-body" id="annotations"></div>
+                                    <div class="col-lg-12 px-0 mb-5">
+                                        <!-- Collapse Panel 2-->
+                                        <button data-toggle="collapse" data-target="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-suc btn-block py-2 shadow-sm with-chevron" style="border-radius: 30px;">
+                                            <p class="d-flex justify-content-between mb-0 px-1 py-2"><strong class="text-uppercase">Named Entity Recognition</strong><i class="fa fa-angle-down"></i></p>
+                                        </button>
+                                        <div id="collapseExample2" class="collapse">
+                                            <div class="row" style="margin-left:20px; margin-top:20px;">
+                                                <div class="col-lg-10 col-md-9 col-sm-8 col-11">
+                                                    <div id="nerText"></div>
+                                                </div> 
+                                                <div class="col-lg-2 col-md-3 col-sm-4 col-12 row-small ner-legend">
+                                                    <p class="font-weight-bold size legenda-label">Legend</p>
+                                                    <ul class="legenda">
+                                                        <li><span class="org"></span> : ORG</li>
+                                                        <li><span class="per"></span> : PER</li>
+                                                        <li><span class="misc"></span> : MISC</li>
+                                                        <li><span class="loc"></span> : LOC</li>
+                                                        <li><span class="dts"></span> : DATE/SET/TIME</li>
+                                                        <li><span class="money"></span> : MONEY</li>
+                                                        <li><span class="percent"></span> : PERCENT</li>
+                                                        <li><span class="other"></span> : OTHER</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 px-0 mb-5">
+                                        <!-- Collapse Panel 3-->
+                                        <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-war btn-block py-2 shadow-sm with-chevron" style="border-radius: 30px;">
+                                            <p class="d-flex justify-content-between mb-0 px-1 py-2"><strong class="text-uppercase">Basic Dependencies</strong><i class="fa fa-angle-down"></i></p>
+                                        </a>
+                                        <div id="collapseExample3" class="collapse">
+                                            <div class="row" style="margin-left:20px; margin-top:20px;">
+                                                <div class="col-lg-11 col-md-11 col-sm-11 col-11">
+                                                    <div class="panel panel-warning">
+                                                        <div class="panel-body" id="annotations"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="tab-pane p-4 fade" id="file-json-content" role="tabpanel" aria-labelledby="text-original">
-                                    <div class="row" style="margin-left:-30px;">
-                                        <div class="col-lg-11 col-md-11 col-sm-11 col-12">
+                                <div id="file-json-content" role="tabpanel" aria-labelledby="file-json" class="tab-pane fade px-3 py-5">
+                                    <div class="row">
+                                        <div class="col-lg-11 col-md-11 col-sm-11 col-12 mb-5">
                                             <div class="panel panel-default">
                                                 <pre id="showJson"></pre>
                                             </div>
@@ -244,12 +284,13 @@
                             </div>
                         </div>
                     </div>
-                </div>     
+                </div>
+                <!--end card-->
             </div>
         </div>
     </div>
             
-    <div id="footer" class="lightgrey-bg-c1 rounded">
+    <div id="footer" class="rounded">
         <div class="row">
             <div class="col-12 d-flex justify-content-center" id="footer_logo">
                 <a href="http://www.simpatico-project.eu">
@@ -269,6 +310,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
