@@ -52,7 +52,6 @@ function caricaContenuto(t, addState, tabName) {
         $("#statistics1").empty();
         $("#statistics2").empty();
         $("#difficulty-values-panel").empty();
-        
         $("#infoText").empty();
         $("#annotations").empty();
         $("#showJson").empty();
@@ -100,10 +99,9 @@ function caricaContenuto(t, addState, tabName) {
                         var after = "";
                         var page;
                         var pos=token.characterOffsetBegin;
-                        var color;
 
                         if (token.pos != "FB") {
-                            before = '<span tabindex="0" data-html="true" data-container="body" data-toggle="popover" role="button" title="Detailed information" class="word_hover my-popover label label-default ';
+                            before = '<span tabindex="0" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom"  role="button" title="Detailed information" class="word_hover my-popover label label-default ';
                             if (token.pos.startsWith('R')) {
                                 before += 'pos-r" ';
                             } else if (token.pos.startsWith('V') || token.pos.startsWith('M')) {
@@ -138,49 +136,35 @@ function caricaContenuto(t, addState, tabName) {
                             
                             if (token.pos.startsWith('R')) {
                                 before += 'pos-r';
-                                color = 'color_r';
                             } else if (token.pos.startsWith('V') || token.pos.startsWith('M')) {
                                 before += 'pos-vm';
-                                color = 'color_v';
                             } else if (token.pos.startsWith('A')) {
                                 before += 'pos-a';
-                                color = 'color_a';
                             }else if (token.pos.startsWith('B')) {
                                 before += 'pos-b';
-                                color = 'color_b';
                             } else if (token.pos.startsWith('E')) {
                                 before += 'pos-e';
-                                color = 'color_e';
                             } else if (token.pos.startsWith('N') || token.pos.startsWith('W')) {
                                 before += 'pos-nw';
-                                color = 'color_n';
                             } else if (token.pos.startsWith('D')) {
                                 before += 'pos-dcd';
-                                color = 'color_d';
                             } else if (token.pos.startsWith('S')) {
                                 before += 'pos-s';
-                                color = 'color_s';
                             }else if (token.pos.startsWith('P')) {
                                     before += 'pos-p';
-                                    color = 'color_p';
                             } else if (token.pos.startsWith('C')){
                                 before += 'pos-c';
-                                color = 'color_c';
                             } else if (token.pos.startsWith('I')) {
                                 before += 'pos-ilsfw';
                             } else if (token.pos == 'LS' || token.pos == 'FW') {
                                 before += 'pos-ilsfw';
-                                color = 'color_b';
                             }else if (token.pos.startsWith('F')){
                                 before += 'pos-f';
-                                color = 'color_f';
                             }else {
                                 before += 'pos';
-                                color = 'color_x';
                             }
 
                             before += '>'+token.pos +' : ';
-
 
                             if (token.pos.startsWith('A')) {
                                 before += 'Adjective';
@@ -208,7 +192,37 @@ function caricaContenuto(t, addState, tabName) {
                                 before += 'Other';
                             }
 
-                            before += '</span><br><br>';
+                            before += '</span><br>';
+
+                            if(token.ner != "O"){
+                                before += '<span class=';
+                                if (token.ner == 'PER') {
+                                    before += 'ner_per';
+                                } else if (token.ner == 'ORG') {
+                                    before += 'ner_org';
+                                } else if (token.ner == 'MISC') {
+                                    before += 'ner_misc';
+                                } else if (token.ner == 'LOC') {
+                                    before += 'ner_loc';
+                                } else if (token.ner == 'DATE' || token.ner == 'TIME' || token.ner == 'SET' || token.ner == 'NUMBER') {
+                                    before += 'ner_dts';
+                                } else if (token.ner == 'MONEY') {
+                                    before += 'ner_money';
+                                } else if (token.ner == 'PERCENT') {
+                                    before += 'ner_percent';
+                                } else {
+                                    before += 'ner_other';
+                                }
+                                before += '>'+token.ner +'</span><br><br>';
+                            }else{
+                                before += '<br>';
+                            }
+                            
+                            before += '<span><b>CharacterOffsetBegin</b></span> : '+ token.characterOffsetBegin + '<br>' ;
+                            before += '<span><b>CharacterOffsetEnd</b></span> : '+ token.characterOffsetEnd + '<br>' ;
+                            before += '<span><b>Index</b></span> : '+ token.index + '<br>' ;
+                            before += '<span><b>Word</b></span> : '+ token.word + '<br>' ;
+                            before += '<span><b>Lemma</b></span> : '+ token.lemma + '<br>' ;
                                     
                             if (token.simplifiedVersion !== undefined || token.linking !== undefined || data.readability.forms[token.characterOffsetBegin] !== undefined) {
                                 var pos=token.characterOffsetBegin;
@@ -217,7 +231,7 @@ function caricaContenuto(t, addState, tabName) {
                                 if(data.readability.forms[pos] !== undefined){
                                     if(data.readability.forms[pos].start === token.characterOffsetBegin && data.readability.forms[pos].end === token.characterOffsetEnd)
                                     {
-                                        before += '<span class='+color+ 'font-weight-bold><strong>Definition</strong></span> : '+ data.readability.forms[pos].description.description.replace('"', "'") + '<br>';
+                                        before += '<span><b>Definition</b></span> : '+ data.readability.forms[pos].description.description.replace('"', "'") + '<br>';
                                     }
                                 }
                                 // Links
@@ -228,56 +242,72 @@ function caricaContenuto(t, addState, tabName) {
                                     page = page.replace(/\/resource\//gi, "/wiki/");
                                     page = encodeURI(page);
 
-                                    before += '<span class='+color+'><b>Wikipedia link</b></span> : <a href='+page+' class=target=_blank>'+ page + '</a><br>';
+                                    before += '<span><b>Wikipedia link</b></span> : <a href='+page+' class=target=_blank>'+ page + '</a><br>';
                                 }
                                 // Lexical simplifications
                                 if(token.simplifiedVersion !== undefined){
-                                    before += '<span class='+color+'><b>Lexical simplifications</b></span> : '+ token.simplifiedVersion.replace('"', "'") + '<br>' ;
+                                    before += '<span><b>Lexical simplifications</b></span> : '+ token.simplifiedVersion.replace('"', "'") + '<br>' ;
                                 }
                             }
 
                             if(!token.pos.startsWith('F')){
-                                before += '<span class='+color+'><b>Lemma</b></span> : '+token.lemma+'<br>';
-                                before +='<span class='+color+'><b>Hyphenation</b></span> : '+token.hyphenation+'<br>';
+                                before +='<span><b>Hyphenation</b></span> : '+token.hyphenation+'<br>';
+
+                                before +='<span><b>Features</b></span> : '+ token.featuresText + '<br>';
+                                before +='<span><b>Selected morpho</b></span> : '+ token.selected_morpho + '<br>';
+                                before +='<span><b>Full morpho</b></span> : '+ token.full_morpho;
 
                                 if(token.pos.includes("V")){
 
+                                    var completeVerb = "";
+
                                     $.each(item.verbs, function (j, verb) {
                                         
-                                        if(verb.tokens.includes(index) &&  verb.tokens[0] === index){
+                                        if(verb.tokens.includes(index)){
 
-                                            before += '<span class='+color+'><b>Features</b></span> : <br> &middot; '+ token.featuresText + ' <br> &middot; ' + token.selected_morpho + ' <br> &middot; isPassive : ' + verb.isPassive + ' <br> &middot; Mood : ' + verb.mood;
-                                            //before +='<span class='+color+'><b>isPassive</b></span> : '+verb.isPassive+'<br>';
-                                            //before +='<span class='+color+'><b>Mood</b></span> : '+verb.mood+'<br>';
+                                            var array= verb.tokens;
+                                            $.each(array, function (j, index) {
+                                                $.each(item.tokens, function (j, token) {
+                                                    if(token.index == index){
+                                                        if(completeVerb != ""){
+                                                            completeVerb += " " + token.word;
+                                                        }
+                                                        else{
+                                                            completeVerb += token.word;
+                                                        }
+                                                    }
+                                                });  
+                                            });
+
+                                            before += '<br><span><b>Verb features</b></span> : <ul><li>'+token.selected_morpho+'</li><li>isPassive : ' + verb.isPassive + '</li><li>Mood : ' + verb.mood+'</li>';
+                        
                                             if(verb.person != undefined){
-                                                before += ' <br> &middot; Person : ' + verb.person;
-                                                //before +='<span class=color_v><b>Person</b></span> : '+verb.person+'<br>';
+                                                before += ' <li>Person : ' + verb.person+'</li>';
                                             }
                                                     
                                             if(verb.tense != undefined){
-                                                before += ' <br> &middot; Tense : ' + verb.tense;
-                                                //before +='<span class=color_v><b>Tense</b></span> : '+verb.tense;
+                                                before += ' <li>Tense : ' + verb.tense+'</li>';
                                             }
-
-                                            before += '</em>';
-                                            
+                                            before += '<li>Complete form : ' + completeVerb + '</li></ul>';
                                         }
                                     })
-
-                                }else{
-                                    before +='<span class='+color+'><b>Features</b></span> : '+ token.featuresText;
                                 }
 
                                 if(token.derivation != undefined){
-                                    before += '<br><span class='+color+'><b>Derivation</b></span> : <ul><li>'+ token.derivation.baseLemma + ' - <em>' + token.derivation.baseType + '</em></li>';
+                                    before += '<br><span><b>Derivation</b></span> : <ul><li>'+ token.derivation.baseLemma + ' - <em>' + token.derivation.baseType + '</em></li>';
                                     token.derivation.phases.forEach(function (phase) {
                                         before += '<li>'+phase.affix + ' - <em>' + phase.type + '</em></li>';
                                     });
 
                                     before += '</ul>';
-                                }else{
+                                }
+
+                                if(!token.pos.includes("V")){
                                     before +='<br><br>';
                                 }
+
+                            }else{
+                                before +='<br>';
                             }
 
                             var color;
@@ -318,37 +348,8 @@ function caricaContenuto(t, addState, tabName) {
                             }
                             before += '">';
                             after = '</span>';
+                        }
 
-                        }/*else if (token.pos.includes("V")){
-                            $.each(item.verbs, function (j, verb) {
-                                if(verb.tokens.includes(index) &&  verb.tokens[0] === index){
-                                    var firstIndex = verb.tokens[0];
-                                    var lastIndex = verb.tokens[verb.tokens.length-1];
-                                    $.each(item.tokens, function (j, token) {
-                                        if(token.index === firstIndex){
-                                            start =  token.characterOffsetBegin - item.characterOffsetBegin;
-                                        }else if(token.index === lastIndex){
-                                            end = token.characterOffsetEnd - item.characterOffsetBegin;
-                                        }
-                                    });
-
-                                    before = '<span tabindex="0" data-html="true" data-toggle="popover" role="button" title="Detailed information" class="word_hover my-popover label label-default pos-vm"';
-                                    before += 'data-content="<span class=pos-vm> V: Verb</span><br><br>';
-                                    before +='<span class=color_v><b>isPassive</b></span> : '+verb.isPassive+'<br>';
-                                    before +='<span class=color_v><b>Mood</b></span> : '+verb.mood+'<br>';
-                                    if(verb.person != undefined){
-                                        before +='<span class=color_v><b>Person</b></span> : '+verb.person+'<br>';
-                                    }
-                                            
-                                    if(verb.tense != undefined){
-                                        before +='<span class=color_v><b>Tense</b></span> : '+verb.tense+'<br>';
-                                    }
-                                    before += '">';
-                                    after = '</span>';
-                                }
-                            })
-                        }*/
- 
                         var newText = simpText.substring(0, start);
                         newText += before;
                         newText += simpText.substring(start, end);
@@ -523,6 +524,67 @@ function caricaContenuto(t, addState, tabName) {
                     })
                 });
 
+                //NER
+                $.each(data.sentences, function (i, item) {
+                    var n = $("<div></div>");
+                    var levels = [];
+                    for (var j = 0; j < 3; j++) {
+                        levels[j] = 0;
+                    }
+                    var nerText = item.text;
+
+                    $.each(item.tokens, function (j, token) {
+                        var start = token.characterOffsetBegin - item.characterOffsetBegin;
+                        var end = token.characterOffsetEnd - item.characterOffsetBegin;
+                        var before = "";
+                        var after = "";
+
+                        before = '<span tabindex="0" data-html="true" class="';
+
+                        if (token.ner != 'O') {
+                            if (token.ner == 'PER') {
+                                before += 'ner_per"';
+                            } else if (token.ner == 'ORG') {
+                                before += 'ner_org" ';
+                            } else if (token.ner == 'MISC') {
+                                before += 'ner_misc" ';
+                            } else if (token.ner == 'LOC') {
+                                before += 'ner_loc" ';
+                            } else if (token.ner == 'DATE' || token.ner == 'TIME' || token.ner == 'SET' || token.ner == 'NUMBER') {
+                                before += 'ner_dts" ';
+                            } else if (token.ner == 'MONEY') {
+                                before += 'ner_money" ';
+                            } else if (token.ner == 'PERCENT') {
+                                before += 'ner_percent"';
+                            } else {
+                                before += 'ner_other"';
+                            }
+                        }
+                        else{
+                            before += 'ner_other"';
+                        }
+
+                        before += '>';
+                        after = '</span>';
+
+                        var newText = nerText.substring(0, start);
+                        newText += before;
+                        newText += nerText.substring(start, end);
+                        newText += after;
+                        newText += nerText.substring(end);
+                        nerText = newText;
+                    });
+
+                    var row = $("<div></div>");
+                    row.addClass("row");
+                    row.addClass("row-sentence-ner");
+
+                    n.append(nerText);
+                    n.append(row);
+                    n.addClass("sentence");
+                    $("#nerText").append(n);
+                });
+
                 $("#part2").popover({
                     selector: ".my-popover",
                     trigger: "focus"
@@ -530,7 +592,6 @@ function caricaContenuto(t, addState, tabName) {
                 });
 
                 // Gauges          
-
                 var mainValue = data.readability.measures.main;
                 var mainName = data.readability.labels.main;
                 
@@ -824,13 +885,13 @@ function caricaContenuto(t, addState, tabName) {
                         }
                         // (render the element)
                         if (ok) {
-                            $('#annotations').append('<h6>' + label + ':</h6> <div id="' + id + '"></div><br>');
+                            $('#annotations').append('<div id="' + id + '"></div><br>');
                         }
                     }
                     // (create the divs)
                     //                  div id      annotator     field_in_data                          label
                     //createAnnotationDiv('pos', 'pos', 'pos', 'Part-of-Speech');
-                    createAnnotationDiv('ner', 'ner', 'ner', 'Named Entity Recognition');
+                    //createAnnotationDiv('ner', 'ner', 'ner', 'Named Entity Recognition');
                     createAnnotationDiv('deps', 'depparse', 'basic-dependencies', 'Basic Dependencies');
                     
                     // Render
@@ -875,13 +936,13 @@ $(function () {
 				caricaPaginaIniziale(false)
 			}
 			if (parts[1] == "text") {
-                if(parts[3] == "#linguistic-annotations"){
-                    caricaTabs("linguistic-annotations-tab");       
+                if(parts[3] == "#file-json-content"){
+                    caricaTabs("file-json");       
                     //caricaContenuto(parts[2],false, "linguistic-annotations-tab");
-                }else if(parts[3] == "#file-json-content"){
-                    caricaTabs("file-json");     
-                }else{
+                }else if(parts[3] == "#text-original-content"){
                     caricaTabs("text-original");     
+                }else{
+                    caricaContenuto(parts[2],false, "text-original");
                 }
 			}
 		}
