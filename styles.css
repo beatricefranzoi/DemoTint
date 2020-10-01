@@ -2,6 +2,7 @@ body{
     background-image: linear-gradient( 359deg,  rgba(150,192,255,1) -17.7%, rgba(255,180,161,1) 101.5% );
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: 'Barlow', sans-serif;
 }
 
 .btn-grad {
@@ -11,7 +12,7 @@ body{
     border-radius: 50px;
     transition: 0.5s;
     background-size: 200% auto;
-    color: white;            
+    color: white;  
     box-shadow: 0 0 20px #eee;
 }
 
@@ -22,7 +23,7 @@ body{
 }
 
 #card{
-    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    box-shadow: 0 6px 10px gray, 0 0 6px gray;
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
     cursor: pointer;
 }
@@ -215,10 +216,16 @@ h5{
 
 @media (max-width: 575.98px) {
     #statistics1{
-        font-size: 12px;
+        font-size: 13px;
     }
     #statistics2{
-        font-size: 12px;
+        font-size: 13px;
+    }
+    .btn-grad{
+        font-size: 14px;
+    }
+    .header-card{
+        font-size: 15px;
     }
 }
 
@@ -228,6 +235,9 @@ h5{
     }
     #statistics2{
         font-size:14px;
+    }
+    .btn-grad{
+        font-size: 16px;
     }
 }
 
@@ -308,7 +318,7 @@ h5{
 
 .badge-info{
     color: #fff;
-    background-color: hsla(354, 68%, 49%, 0.831);
+    background-image: linear-gradient(to right, #cb2d3d 0%, #ef473a  51%, #cb2d3e  100%);
 }
 
 .badge-tag-green{
@@ -582,11 +592,11 @@ h5{
 
 .nav-tabs .nav-link {
     color: gray;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .card-title{
-    font-weight: 500;
+    font-weight: bold;
     color:#D02838;
 }
 
@@ -647,6 +657,12 @@ h5{
     #showJson{
         font-size: 12px;
     }
+    .header-card{
+        font-size: 16px;
+    }
+    .btn-grad{
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 575.98px){ 
@@ -660,15 +676,8 @@ h5{
     margin-left: 20px;
 }
 
-@media (max-width: 650px){ 
-    .header-card{
-        font-size: 16px;
-    }
-}
-
 .header-card{
-    margin-left:10px;
-    font-weight: 500;
+    margin-left:10px;   
 }
 
 @media(min-width: 992px){
