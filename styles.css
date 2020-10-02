@@ -390,8 +390,8 @@ h5{
 }
 
 .pos-p{
-    background-color: #ff0d0d7c;
-    border: 1px solid #ff0d0d7c;
+    background-color:#eb8c8d;
+    border: 1px solid #eb8c8d;
     color: black;
     border-radius: 6px;
     padding: .10em .2em;
@@ -423,8 +423,8 @@ h5{
 
 .pos-f{
     margin-left: 2px;
-    background-color: #ffc4beb3;
-    border: 1px solid #ffc4beb3; 
+    background-color: #eec0c8;
+    border: 1px solid #eec0c8; 
     color: black;
     border-radius: 6px;
     padding: .10em .2em;
@@ -471,8 +471,8 @@ h5{
 }
 
 .pos-c{
-    border: 1px solid #afffa8;
-    background-color: #afffa8;
+    border: 1px solid #71BC78;
+    background-color: #71BC78;
     color: black;
     border-radius: 6px;
     padding: .10em .2em;
@@ -519,7 +519,7 @@ h5{
 
 .f{
     font-size:11px; 
-    background-color: #ffc4beb3; 
+    background-color: #eec0c8; 
     border-radius: 2px; 
     padding: 0px 1.4px;
 }
@@ -568,14 +568,14 @@ h5{
 
 .p{
     font-size:11px; 
-    background-color: #ff0d0d7c;
+    background-color: #eb8c8d;
     border-radius: 2px; 
     padding: 0px 1px;
 }
 
 .c{
     font-size:11px; 
-    background-color: #afffa8;
+    background-color: #71BC78;
     border-radius: 2px; 
     padding: 0px 1px;
 }
@@ -602,11 +602,15 @@ h5{
 
 @media (max-width: 460px){
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-        font-size: 9px;
+        font-size: 13px;
     }
     .nav-tabs .nav-item.show .nav-link, .nav-tabs{
-        font-size: 9px;
+        font-size: 13px;
     }
+    .text-uppercase{
+        font-size: 11px;
+    }
+
 }
 
 @media (min-width:  460px) and (max-width: 726px) { 
@@ -616,14 +620,20 @@ h5{
     .nav-tabs .nav-item.show .nav-link, .nav-tabs{
         font-size: 14px;
     }
+    .text-uppercase{
+        font-size: 12px;
+    }
 }
 
 @media (min-width:  726px) { 
     .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-        font-size: 16px;
+        font-size: 17px;
     }
     .nav-tabs .nav-item.show .nav-link, .nav-tabs{
-        font-size: 16px;
+        font-size: 17px;
+    }
+    .text-uppercase{
+        font-size: 15px;
     }
 }
 
