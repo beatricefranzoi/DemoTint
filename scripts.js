@@ -294,17 +294,19 @@ function caricaContenuto(t, addState, tabName) {
                                 }
 
                                 if(token.derivation != undefined){
-                                    before += '<br><span><b>Derivation</b></span> : <ul><li>'+ token.derivation.baseLemma + ' - <em>' + token.derivation.baseType + '</em></li>';
+                                    if(!token.pos.includes("V"))
+                                    {
+                                        before += '<br>';
+                                    }
+                                    before += '<span><b>Derivation</b></span> : <ul><li>'+ token.derivation.baseLemma + ' - <em>' + token.derivation.baseType + '</em></li>';
                                     token.derivation.phases.forEach(function (phase) {
                                         before += '<li>'+phase.affix + ' - <em>' + phase.type + '</em></li>';
                                     });
 
                                     before += '</ul>';
-                                }
-
-                                if(!token.pos.includes("V")){
+                                }else if(!token.pos.includes("V")){
                                     before +='<br><br>';
-                                }
+                                } 
 
                             }else{
                                 before +='<br>';
